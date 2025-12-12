@@ -3,7 +3,7 @@
 Class 20 12/12 Lecture
 **Author:** Alina Ali
 
-## subheading
+## Alina is stupid
 
 Bulleted list: 
 * item 1
