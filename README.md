@@ -2,8 +2,9 @@
 
 Class 20 12/12 Lecture
 **Author:** Alina Ali
+**Last Updated:** 12/12/2025
 
-## Alina is stupid
+## subheading
 
 Bulleted list: 
 * item 1
