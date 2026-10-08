@@ -1,0 +1,17 @@
+{"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+    "data": {
+       "url": "https://raw.githubusercontent.com/alina-ali27/alina-ali27.github.io/refs/heads/main/GASDESW.csv"},
+
+    "title": {"text": "US Diesel Prices"},
+
+    "width":600,
+    "height":300,
+
+    "mark":{"type": "line","color":"red"},
+ 
+    "encoding": {
+      "x": {"field": "date","type": "temporal"},
+      "y": {"field": "diesel price","type": "quantitative"}
+    }
+}
