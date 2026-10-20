@@ -1,41 +1,25 @@
 <!DOCTYPE html>
 <!--
-  Alina Ali: policy data portfolio (Automated Data Vis)
-  Structure lives here; all styling lives in index.css (same folder).
-
-  HOW CHARTS WORK ON THIS PAGE
-  Each chart is a <div class="plate"> with a few attributes:
-    data-spec="file.json"            your Vega-Lite spec (required)
-    data-source="https://..."        where the original data comes from (optional)
-    data-source-label="World Bank"   text for that link (optional, defaults to "Source")
-    data-data="data/file.csv"        only if you want to override the data link (optional)
-  The script at the bottom loops over every plate, embeds the chart with vegaEmbed,
-  and builds its links row: Chart JSON, Data (read from the spec's data.url) and Source.
+  Alina Ali: PP434 portfolio (Automated Data Visualisation)
+  Structure lives here; styling lives in index.css (same folder).
+  Charts are embedded exactly like the course template: each <figure> has an id,
+  and the script at the bottom calls vegaEmbed('#LocationX', spec) for it.
 -->
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Alina Ali | Data science for public policy</title>
-    <meta name="description" content="Portfolio of policy charts by Alina Ali, MPA in Data Science for Public Policy at LSE.">
+    <title>Alina Ali | PP434 portfolio</title>
 
-    <!-- Apply a saved light/dark choice before the page draws, so it doesn't flash -->
-    <script>
-        try {
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
-        } catch (e) { }
-    </script>
-
-    <!-- Fonts: Archivo (headings and interface) + Source Serif 4 (commentary) -->
+    <!-- Fonts: Archivo (headings and interface) + Source Serif 4 (descriptions) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 
-    <!-- Vega-Lite libraries for the charts (same versions as the course template) -->
+    <!-- This is a link to the vega-lite packages which we're using to make graphs -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
@@ -43,332 +27,223 @@
 
 <body>
 
-    <a class="skip-link" href="#challenges">Skip to the charts</a>
-
     <!-- Top bar: stays pinned while scrolling -->
     <header class="topbar">
-        <a class="topbar__name" href="#top">Alina Ali</a>
+        <a class="topbar__home" href="#top">PP434 portfolio</a>
         <nav class="topbar__nav" aria-label="Main">
-            <a href="#challenges">Portfolio</a>
-            <a href="project.html">Final project</a>
-            <a class="topbar__social" href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
-            <a class="topbar__social" href="https://github.com/alina-ali27">GitHub</a>
-            <button class="theme-toggle" type="button" id="themeToggle">Dark mode</button>
+            <a href="#challenge1">Challenge 1</a>
+            <a href="#challenge2">Challenge 2</a>
+            <a class="topbar__extra" href="project.html">Final project</a>
         </nav>
     </header>
 
     <main id="top">
 
-        <!-- HERO: one big statement, like a poster -->
+        <!-- HERO: name, links, intro, with a self-drawing line chart behind it -->
         <section class="hero">
-            <h1 class="hero__title">
-                <span>Data science</span>
-                <span>for public</span>
-                <span>policy.</span>
-            </h1>
-
-            <div class="hero__meta">
-                <p>MPA in Data Science for Public Policy at the London School of Economics.</p>
-                <p>Charts built for Automated Data Vis, 2026/27.</p>
-                <p>Working where quantitative methods meet public policy and AI governance.</p>
-            </div>
-        </section>
-
-        <!-- CHALLENGES: an index of all ten, then one block per chart -->
-        <section class="work" id="challenges" aria-labelledby="work-title">
-
-            <div class="work__head">
-                <h2 class="work__title" id="work-title">Ten challenges</h2>
-                <p class="work__intro">
-                    Each challenge practises one or two data visualisation skills and ends with a live chart.
-                    Every chart links to its Vega-Lite spec, the data behind it and the original source.
+            <!-- Decorative only: the lines are drawn by the small script at the bottom -->
+            <div class="hero__text">
+                <h1 class="hero__name">Alina Ali</h1>
+                <p class="hero__tagline">Data science for public policy.</p>
+                <p class="hero__links">
+                    <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
+                    <a href="https://github.com/alina-ali27">GitHub</a>
+                </p>
+                <p class="hero__intro">
+                    Exercises for the Automated Data Visualisation class (PP434) at LSE, Autumn Term 2026/27.
                 </p>
             </div>
 
-            <!-- The index. Finished challenges link to their section; the rest are greyed out.
-                 When you finish one, swap its <div class="index__row"> for an <a class="index__row" href="#cX">. -->
-            <ol class="index">
-                <li><a class="index__row" href="#c1">
-                    <span class="index__num">1</span>
-                    <span class="index__name">Inflation in Pakistan</span>
-                    <span class="index__skills">Building a website, embedding a live chart</span>
-                    <span class="index__status">View chart</span>
-                </a></li>
-                <li><a class="index__row" href="#c2">
-                    <span class="index__num">2</span>
-                    <span class="index__name">Unemployment in Pakistan</span>
-                    <span class="index__skills">Hosting data in the cloud</span>
-                    <span class="index__status">View chart</span>
-                </a></li>
-                <li><a class="index__row" href="#c3">
-                    <span class="index__num">3</span>
-                    <span class="index__name">Week 1 practice chart</span>
-                    <span class="index__skills">Editing and cleaning data</span>
-                    <span class="index__status">View chart</span>
-                </a></li>
-                <li><a class="index__row" href="#c4">
-                    <span class="index__num">4</span>
-                    <span class="index__name">Week 1 practice chart, part two</span>
-                    <span class="index__skills">API-driven charts</span>
-                    <span class="index__status">View chart</span>
-                </a></li>
-                <li><a class="index__row" href="#c5">
-                    <span class="index__num">5</span>
-                    <span class="index__name">Test chart</span>
-                    <span class="index__skills">Loops and APIs</span>
-                    <span class="index__status">View chart</span>
-                </a></li>
-                <li><a class="index__row" href="#c6">
-                    <span class="index__num">6</span>
-                    <span class="index__name">Chocolate prices in the UK</span>
-                    <span class="index__skills">Scrapers</span>
-                    <span class="index__status">View chart</span>
-                </a></li>
-                <li class="is-pending"><div class="index__row">
-                    <span class="index__num">7</span>
-                    <span class="index__name">Critical commentary on data</span>
-                    <span class="index__skills"></span>
-                    <span class="index__status">In progress</span>
-                </div></li>
-                <li class="is-pending"><div class="index__row">
-                    <span class="index__num">8</span>
-                    <span class="index__name">Advanced analytics</span>
-                    <span class="index__skills"></span>
-                    <span class="index__status">In progress</span>
-                </div></li>
-                <li class="is-pending"><div class="index__row">
-                    <span class="index__num">9</span>
-                    <span class="index__name">Interactivity</span>
-                    <span class="index__skills"></span>
-                    <span class="index__status">In progress</span>
-                </div></li>
-                <li class="is-pending"><div class="index__row">
-                    <span class="index__num">10</span>
-                    <span class="index__name">LLMs</span>
-                    <span class="index__skills"></span>
-                    <span class="index__status">In progress</span>
-                </div></li>
-            </ol>
-
-            <!--
-              ONE BLOCK PER CHALLENGE
-              To add one: copy an <article>, change its id (c7, c8...), the number, the text,
-              and the plate's data-spec / data-source. No JavaScript changes needed.
-              Grey italic text (class="todo") marks prompts to replace with your own writing.
-              A challenge with two charts? Wrap both <figure class="challenge__chart"> elements in one <div> so they share the right-hand column.
-            -->
-
-            <article class="challenge" id="c1">
-                <div class="challenge__text">
-                    <p class="challenge__num" aria-hidden="true">1</p>
-                    <h3>Inflation in Pakistan</h3>
-                    <p class="challenge__skills">Skills: building a website, embedding a live chart</p>
-                    <div class="challenge__body">
-                        <p class="todo">Say what the chart shows and why it matters for policy in two or three sentences. Which years stand out, and what was happening then?</p>
-                    </div>
-                    <p class="challenge__takeaway"><span>Takeaway</span> <span class="todo">The one sentence you want a policymaker to remember.</span></p>
-                </div>
-                <figure class="challenge__chart">
-                    <div class="plate" data-spec="pak_inflation.json" data-source="" data-source-label="Source"></div>
-                    <div class="chart-links" aria-label="Chart resources"></div>
-                    <figcaption class="chart-note todo">Units, time span and when you downloaded the data, e.g. annual CPI inflation, %, 1990–2024. Retrieved October 2026.</figcaption>
-                </figure>
-            </article>
-
-            <article class="challenge" id="c2">
-                <div class="challenge__text">
-                    <p class="challenge__num" aria-hidden="true">2</p>
-                    <h3>Unemployment in Pakistan</h3>
-                    <p class="challenge__skills">Skills: hosting data in the cloud</p>
-                    <div class="challenge__body">
-                        <p class="todo">How does unemployment move alongside inflation in challenge 1? Point the reader to the one pattern you want them to notice.</p>
-                    </div>
-                    <p class="challenge__takeaway"><span>Takeaway</span> <span class="todo">The one sentence you want a policymaker to remember.</span></p>
-                </div>
-                <figure class="challenge__chart">
-                    <div class="plate" data-spec="pak_unemp.json" data-source="" data-source-label="Source"></div>
-                    <div class="chart-links" aria-label="Chart resources"></div>
-                    <figcaption class="chart-note todo">Units, time span and retrieval date.</figcaption>
-                </figure>
-            </article>
-
-            <article class="challenge" id="c3">
-                <div class="challenge__text">
-                    <p class="challenge__num" aria-hidden="true">3</p>
-                    <h3>Week 1 practice chart</h3>
-                    <p class="challenge__skills">Skills: editing and cleaning data</p>
-                    <div class="challenge__body">
-                        <p class="todo">Describe what you changed in the data before charting it, and why those choices affect what the reader sees.</p>
-                    </div>
-                </div>
-                <figure class="challenge__chart">
-                    <div class="plate" data-spec="wk1_chart1.json" data-source="" data-source-label="Original JSON"></div>
-                    <div class="chart-links" aria-label="Chart resources"></div>
-                    <figcaption class="chart-note todo">Note any cleaning steps, e.g. rows removed or units converted.</figcaption>
-                </figure>
-            </article>
-
-            <article class="challenge" id="c4">
-                <div class="challenge__text">
-                    <p class="challenge__num" aria-hidden="true">4</p>
-                    <h3>Week 1 practice chart, part two</h3>
-                    <p class="challenge__skills">Skills: API-driven charts</p>
-                    <div class="challenge__body">
-                        <p class="todo">Explain where the data comes from and how the chart stays up to date when the source changes.</p>
-                    </div>
-                </div>
-                <figure class="challenge__chart">
-                    <div class="plate" data-spec="wk1_chart2.json" data-source="" data-source-label="Original data"></div>
-                    <div class="chart-links" aria-label="Chart resources"></div>
-                    <figcaption class="chart-note todo">Name the API and the date of the latest data point.</figcaption>
-                </figure>
-            </article>
-
-            <article class="challenge" id="c5">
-                <div class="challenge__text">
-                    <p class="challenge__num" aria-hidden="true">5</p>
-                    <h3>Test chart</h3>
-                    <p class="challenge__skills">Skills: loops and APIs</p>
-                    <div class="challenge__body">
-                        <p class="todo">Give this chart a real title, then describe what the loop does and what the chart lets a policymaker compare.</p>
-                    </div>
-                </div>
-                <figure class="challenge__chart">
-                    <div class="plate" data-spec="test.json" data-source="" data-source-label="Source"></div>
-                    <div class="chart-links" aria-label="Chart resources"></div>
-                    <figcaption class="chart-note todo">Units, coverage and retrieval date.</figcaption>
-                </figure>
-            </article>
-
-            <article class="challenge" id="c6">
-                <div class="challenge__text">
-                    <p class="challenge__num" aria-hidden="true">6</p>
-                    <h3>Chocolate prices in the UK</h3>
-                    <p class="challenge__skills">Skills: scrapers</p>
-                    <div class="challenge__body">
-                        <p class="todo">What did you scrape, from where, and what does the price trend say about the cost of living?</p>
-                    </div>
-                    <p class="challenge__takeaway"><span>Takeaway</span> <span class="todo">The one sentence you want a policymaker to remember.</span></p>
-                </div>
-                <figure class="challenge__chart">
-                    <div class="plate" data-spec="uk_choc_prices.json" data-source="" data-source-label="Scraped page"></div>
-                    <div class="chart-links" aria-label="Chart resources"></div>
-                    <figcaption class="chart-note todo">Which page you scraped, how often, and the date of your snapshot.</figcaption>
-                </figure>
-            </article>
-
+            <!-- Decorative only: the lines are drawn by the small script at the bottom -->
+            <svg class="hero__lines" id="heroLines" viewBox="0 0 900 600"
+                 aria-hidden="true" focusable="false"></svg>
         </section>
+
+        <!-- ================= CHALLENGE 1 ================= -->
+        <section class="challenge" id="challenge1" aria-labelledby="challenge1-title">
+            <header class="challenge__head">
+                <p class="challenge__num" aria-hidden="true">1</p>
+                <div>
+                    <h2 id="challenge1-title">Challenge 1</h2>
+                    <p class="challenge__about">Building a website and embedding live Vega-Lite charts.</p>
+                </div>
+            </header>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 1: Adding a chart</h3>
+                    <p class="todo">A sentence or two on what this chart shows and why you picked it.</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="wk1_chart1.json">Chart JSON</a></p>
+                </div>
+                <!-- This element will contain our vega-lite chart -->
+                <figure class="entry__chart" id="Location1"></figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 2: One more chart</h3>
+                    <p class="todo">What does this second chart add to the first?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="wk1_chart2.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location2"></figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 3: Inflation in Pakistan</h3>
+                    <p class="todo">Which years stand out, and what was happening in Pakistan’s economy then?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="pak_inflation.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location3"></figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 4: Unemployment in Pakistan</h3>
+                    <p class="todo">How does unemployment move alongside the inflation chart above?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="pak_unemp.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location4"></figure>
+            </article>
+        </section>
+
+        <!-- ================= CHALLENGE 2 ================= -->
+        <section class="challenge" id="challenge2" aria-labelledby="challenge2-title">
+            <header class="challenge__head">
+                <p class="challenge__num" aria-hidden="true">2</p>
+                <div>
+                    <h2 id="challenge2-title">Challenge 2</h2>
+                    <p class="challenge__about">Adapting Vega-Lite examples and charting a time series.</p>
+                </div>
+            </header>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Task 1: Adapting a Vega-Lite example</h3>
+                    <p class="todo">Which example did you start from, and what did you change?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="test.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location5"></figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Task 2: Chocolate prices in the UK</h3>
+                    <p class="todo">Which time series did you use, and what edits did you make to the chart’s features?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="uk_choc_prices.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location6"></figure>
+            </article>
+        </section>
+
+        <!-- Adding Challenge 3? Copy a whole <section class="challenge">, change the ids
+             (challenge3, Location7...), and add matching lines to the script below. -->
+
     </main>
 
-    <!-- FOOTER: big contact, echoing the hero -->
     <footer class="footer">
         <h2 class="footer__lead">Get in touch</h2>
-        <ul class="footer__links">
-            <li><a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a></li>
-            <li><a href="https://github.com/alina-ali27">GitHub</a></li>
-        </ul>
+        <p class="footer__links">
+            <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
+            <a href="https://github.com/alina-ali27">GitHub</a>
+        </p>
         <p class="footer__small">Charts made with Vega-Lite. Site hosted on GitHub Pages.</p>
     </footer>
 
     <script>
-        // ---------- Light / dark toggle ----------
-        const toggle = document.getElementById("themeToggle");
-        const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+        // ---------- Charts: same pattern as the course template ----------
 
-        function currentTheme() {
-            return document.documentElement.dataset.theme || (systemDark.matches ? "dark" : "light");
-        }
-        function updateToggleLabel() {
-            // The label names what clicking will do
-            toggle.textContent = currentTheme() === "dark" ? "Light mode" : "Dark mode";
-        }
-        toggle.addEventListener("click", function () {
-            const next = currentTheme() === "dark" ? "light" : "dark";
-            document.documentElement.dataset.theme = next;
-            try { localStorage.setItem("theme", next); } catch (e) { }
-            updateToggleLabel();
-        });
-        updateToggleLabel();
+        // Challenge 1
+        let figure_1_spec = "wk1_chart1.json";
+        vegaEmbed('#Location1', figure_1_spec);
 
-        // ---------- Shared chart look ----------
-        // Matches the page's fonts and colours. Anything set inside a .json spec still wins.
-        const chartTheme = {
-            font: "Archivo, Helvetica Neue, Arial, sans-serif",
-            background: "transparent",
-            view: { stroke: null },
-            title: { fontSize: 15, fontWeight: 600, anchor: "start", color: "#1A1F2B", offset: 14 },
-            axis: {
-                labelColor: "#5C6372",
-                titleColor: "#1A1F2B",
-                titleFontWeight: 500,
-                gridColor: "#E6E8EC",
-                domainColor: "#9AA1AE",
-                tickColor: "#9AA1AE",
-                labelFontSize: 11,
-                titleFontSize: 12
-            },
-            legend: { labelColor: "#5C6372", titleColor: "#1A1F2B", titleFontWeight: 500 },
-            mark: { color: "#2B3CE0" },
-            range: { category: ["#2B3CE0", "#E2711D", "#2A9D8F", "#B83280", "#7A8190", "#E9C46A"] }
-        };
+        let figure_2_spec = "wk1_chart2.json";
+        vegaEmbed('#Location2', figure_2_spec);
 
-        // ---------- Finding the data file inside a spec ----------
-        // Looks at the top-level data first, then inside layered, concatenated or faceted charts.
-        function findDataUrl(spec) {
-            if (!spec || typeof spec !== "object") return null;
-            if (spec.data && spec.data.url) return spec.data.url;
-            const children = [].concat(spec.layer || [], spec.vconcat || [], spec.hconcat || [], spec.concat || []);
-            for (const child of children) {
-                const found = findDataUrl(child);
-                if (found) return found;
+        let figure_3_spec = "pak_inflation.json";
+        vegaEmbed('#Location3', figure_3_spec);
+
+        let figure_4_spec = "pak_unemp.json";
+        vegaEmbed('#Location4', figure_4_spec);
+
+        // Challenge 2
+        let figure_5_spec = "test.json";
+        vegaEmbed('#Location5', figure_5_spec);
+
+        let figure_6_spec = "uk_choc_prices.json";
+        vegaEmbed('#Location6', figure_6_spec);
+
+
+        // ---------- Hero decoration: a few made-up "time series" that draw themselves ----------
+        // Purely visual. A seeded random number generator means the lines look the same on every visit.
+        (function drawHeroLines() {
+            const svg = document.getElementById("heroLines");
+            const NS = "http://www.w3.org/2000/svg";
+            const W = 900, H = 600, STEPS = 56;
+
+            function seeded(a) {
+                return function () {
+                    a |= 0; a = a + 0x6D2B79F5 | 0;
+                    let t = Math.imul(a ^ a >>> 15, 1 | a);
+                    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+                    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+                };
             }
-            return spec.spec ? findDataUrl(spec.spec) : null;
-        }
+            const rand = seeded(434);
 
-        function addLink(container, href, label, external) {
-            const a = document.createElement("a");
-            a.href = href;
-            a.textContent = label;
-            if (external) a.rel = "noopener";
-            container.appendChild(a);
-        }
-
-        // ---------- The loop: embed every chart and build its links ----------
-        document.querySelectorAll(".plate[data-spec]").forEach(async function (el) {
-            const specFile = el.dataset.spec;
-            const links = el.closest("figure").querySelector(".chart-links");
-
-            // 1. Read the spec ourselves so we can find its data file
-            let spec = null;
-            try {
-                const response = await fetch(specFile);
-                if (!response.ok) throw new Error(response.status + " " + response.statusText);
-                spec = await response.json();
-            } catch (error) {
-                console.error(specFile, error);
+            function el(name, attrs) {
+                const node = document.createElementNS(NS, name);
+                for (const key in attrs) node.setAttribute(key, attrs[key]);
+                return node;
             }
 
-            // 2. Build the links row: Chart JSON, Data, Source
-            if (links) {
-                addLink(links, specFile, "Chart JSON");
-                const dataUrl = el.dataset.data || findDataUrl(spec);
-                if (dataUrl) addLink(links, dataUrl, "Data");
-                if (el.dataset.source) addLink(links, el.dataset.source, el.dataset.sourceLabel || "Source", true);
+            // Faint gridlines
+            for (let y = 60; y <= 560; y += 100) {
+                svg.appendChild(el("line", { x1: 0, x2: W, y1: y, y2: y, class: "hero__grid" }));
             }
 
-            // 3. Draw the chart with vegaEmbed, same as the course template
-            if (!spec) {
-                el.innerHTML = '<p class="plate__error">This chart didn’t load. Check that '
-                    + specFile + ' is in the same folder as index.html, then refresh the page.</p>';
-                return;
-            }
-            // actions: false hides the "..." menu. Set it to true to show View Source / Open in Editor.
-            vegaEmbed(el, spec, { actions: false, config: chartTheme }).catch(function (error) {
-                console.error(specFile, error);
-                el.innerHTML = '<p class="plate__error">' + specFile
-                    + ' loaded, but Vega-Lite couldn’t draw it. Open the browser console to see the error.</p>';
+            const series = [
+                { cls: "s-grey",   start: 300, trend: 0.6,  vol: 12 },
+                { cls: "s-grey",   start: 400, trend: -0.6, vol: 14 },
+                { cls: "s-teal",   start: 520, trend: -3.0, vol: 13 },
+                { cls: "s-orange", start: 380, trend: -1.4, vol: 15 },
+                { cls: "s-accent", start: 540, trend: -7.2, vol: 18, band: true }
+            ];
+
+            series.forEach(function (s, index) {
+                const pts = [];
+                let y = s.start;
+                for (let i = 0; i <= STEPS; i++) {
+                    y += s.trend + (rand() - 0.5) * s.vol;
+                    y = Math.max(50, Math.min(570, y));
+                    pts.push([i * (W / STEPS), y]);
+                }
+
+                // Uncertainty band around the main line, widening over time
+                if (s.band) {
+                    const upper = pts.map(function (p, i) { return [p[0], p[1] - 6 - i * 0.7]; });
+                    const lower = pts.map(function (p, i) { return [p[0], p[1] + 6 + i * 0.7]; }).reverse();
+                    const d = "M" + upper.concat(lower).map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join("L") + "Z";
+                    svg.appendChild(el("path", { d: d, class: "hero__band" }));
+                }
+
+                const d = "M" + pts.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join("L");
+                const path = el("path", { d: d, pathLength: 1, class: "hero__line " + s.cls });
+                path.style.animationDelay = (index * 0.15) + "s";
+                svg.appendChild(path);
+
+                if (s.band) {
+                    const last = pts[pts.length - 1];
+                    svg.appendChild(el("circle", { cx: last[0] - 8, cy: last[1], r: 8, class: "hero__dot" }));
+                }
             });
-        });
+        })();
     </script>
 
 </body>
