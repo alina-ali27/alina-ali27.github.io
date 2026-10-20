@@ -1,16 +1,17 @@
 /* =========================================================
-   Alina Ali: portfolio styles
-   Palette: cool paper, ink, one ultramarine accent.
+   Alina Ali: PP434 portfolio styles
+   White page so the Vega-Lite charts (white by default) blend in.
    Change the colours once here and the whole page follows.
    ========================================================= */
 
 :root {
-    --paper: #F1F2F4;   /* page background */
+    --paper: #FFFFFF;   /* page background: matches the charts */
     --ink: #1A1F2B;     /* main text */
     --muted: #5C6372;   /* secondary text */
-    --rule: #D3D6DC;    /* dividing lines */
-    --accent: #2B3CE0;  /* ultramarine: numbers, links on hover */
-    --plate: #FFFFFF;   /* the panel each chart sits on */
+    --rule: #E3E5E9;    /* dividing lines */
+    --accent: #2B3CE0;  /* ultramarine */
+    --orange: #E2711D;
+    --teal: #2A9D8F;
 
     --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
     --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
@@ -19,37 +20,13 @@
     color-scheme: light;
 }
 
-/* Dark mode: follows the visitor's system setting unless they pick one with the toggle.
-   Chart plates stay light so Vega-Lite's dark text stays readable. */
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --paper: #13161D;
-        --ink: #E9EBEF;
-        --muted: #9BA2AF;
-        --rule: #2B303B;
-        --accent: #8F9BFF;
-        --plate: #F5F6F8;
-        color-scheme: dark;
-    }
-}
-
-:root[data-theme="dark"] {
-    --paper: #13161D;
-    --ink: #E9EBEF;
-    --muted: #9BA2AF;
-    --rule: #2B303B;
-    --accent: #8F9BFF;
-    --plate: #F5F6F8;
-    color-scheme: dark;
-}
-
 /* ---------- Base ---------- */
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem; /* so anchor links don't hide under the top bar */
+    scroll-padding-top: 4.5rem; /* so jump links don't hide under the top bar */
 }
 
 body {
@@ -75,19 +52,6 @@ a:hover { color: var(--accent); }
     outline-offset: 3px;
 }
 
-/* Hidden until a keyboard user tabs to it */
-.skip-link {
-    position: absolute;
-    left: var(--gutter);
-    top: -3rem;
-    z-index: 20;
-    padding: 0.5rem 0.9rem;
-    background: var(--ink);
-    color: var(--paper);
-    text-decoration: none;
-}
-.skip-link:focus { top: 0.75rem; color: var(--paper); }
-
 /* ---------- Top bar ---------- */
 
 .topbar {
@@ -99,305 +63,235 @@ a:hover { color: var(--accent); }
     align-items: baseline;
     gap: 1rem;
     padding: 1rem var(--gutter);
-    background: var(--paper);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
-.topbar a { text-decoration: none; }
-
-.topbar a,
-.theme-toggle { white-space: nowrap; }
-
-.topbar__name { font-weight: 600; }
+.topbar a { text-decoration: none; white-space: nowrap; }
+.topbar__home { font-weight: 600; }
 
 .topbar__nav {
     display: flex;
-    align-items: baseline;
     gap: clamp(0.9rem, 2.5vw, 2rem);
 }
-
-.theme-toggle {
-    padding: 0;
-    border: 0;
-    background: none;
-    font: inherit;
-    color: var(--muted);
-    cursor: pointer;
-}
-.theme-toggle:hover { color: var(--accent); }
 
 /* ---------- Hero ---------- */
 
 .hero {
-    min-height: calc(100vh - 3.5rem);
-    min-height: calc(100svh - 3.5rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: clamp(3rem, 10vh, 7rem) var(--gutter) 2rem;
-}
-
-.hero__title {
-    margin: 0;
-    font-weight: 700;
-    font-stretch: 72%;            /* uses Archivo's width axis: narrow, poster-like */
-    font-size: clamp(3.25rem, 12.5vw, 11.5rem);
-    line-height: 0.9;
-    letter-spacing: -0.025em;
-}
-
-.hero__title span {
-    display: block;
-    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
-.hero__title span:nth-child(2) { animation-delay: 0.08s; }
-.hero__title span:nth-child(3) { animation-delay: 0.16s; }
-
-@keyframes rise {
-    from { opacity: 0; transform: translateY(35%); }
-}
-
-.hero__meta {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem var(--gutter);
-    margin-top: 3rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--ink);
-}
-
-.hero__meta p {
-    margin: 0;
-    max-width: 30ch;
-    color: var(--muted);
-}
-
-/* ---------- Challenges: heading + index ---------- */
-
-.work {
-    padding: clamp(4rem, 12vh, 8rem) var(--gutter) 0;
-}
-
-.work__head {
-    display: grid;
-    grid-template-columns: 4fr 8fr;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
     gap: var(--gutter);
-    align-items: end;
-    margin-bottom: 2.5rem;
+    min-height: calc(92vh - 3.5rem);
+    min-height: calc(92svh - 3.5rem);
+    padding: clamp(2rem, 6vh, 4rem) 0 2rem var(--gutter);
+    overflow: hidden;
 }
 
-.work__title {
+/* Dot grid behind the hero, fading out towards the bottom */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: radial-gradient(circle, #D5D9E0 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    pointer-events: none;
+}
+
+.hero__text {
+    position: relative;
+    z-index: 1;
+    max-width: 44rem;
+}
+
+.hero__name {
     margin: 0;
     font-weight: 700;
-    font-stretch: 72%;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
+    font-stretch: 72%;          /* Archivo's width axis: narrow, poster-like */
+    font-size: clamp(4rem, 15vw, 13rem);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
 }
 
-.work__intro {
-    margin: 0;
-    max-width: 52ch;
+.hero__tagline {
+    margin: 1.25rem 0 0;
+    font-weight: 500;
+    font-stretch: 85%;
+    font-size: clamp(1.4rem, 3vw, 2.25rem);
+    line-height: 1.1;
+    color: var(--accent);
+}
+
+.hero__links {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1.5rem 0 0;
+    font-weight: 500;
+}
+
+.hero__intro {
+    margin: 1rem 0 0;
+    max-width: 38ch;
     font-family: var(--serif);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     line-height: 1.55;
     color: var(--muted);
 }
 
-.index {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--ink);
+/* The decorative chart beside the name, running off the right edge */
+.hero__lines {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
 }
 
-.index li { border-bottom: 1px solid var(--rule); }
+.hero__grid { stroke: #EEF0F3; stroke-width: 1; }
 
-.index__row {
-    display: grid;
-    grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1.2fr) 7rem;
-    gap: 1rem;
-    align-items: baseline;
-    padding: 0.95rem 0;
-    text-decoration: none;
+.hero__line {
+    fill: none;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.index__num {
-    font-weight: 600;
-    font-stretch: 112%;
-    font-variant-numeric: tabular-nums;
-    color: var(--accent);
+.s-grey   { stroke: #C3C8D1; stroke-width: 1.5; }
+.s-teal   { stroke: var(--teal); stroke-width: 2; }
+.s-orange { stroke: var(--orange); stroke-width: 2; }
+.s-accent { stroke: var(--accent); stroke-width: 4.5; }
+
+.hero__band {
+    fill: var(--accent);
+    opacity: 0;
+    animation: fade 1s ease 2.2s forwards;
 }
 
-.index__name {
-    font-size: 1.25rem;
-    font-weight: 500;
+.hero__dot {
+    fill: var(--accent);
+    opacity: 0;
+    animation: fade 0.4s ease 2.7s forwards;
 }
 
-.index__skills,
-.index__status { color: var(--muted); }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fade { to { opacity: 0.1; } }
+.hero__dot { animation-name: fade-full; }
+@keyframes fade-full { to { opacity: 1; } }
 
-.index__status {
-    font-size: 0.9rem;
-    text-align: right;
-}
-
-a.index__row:hover .index__name,
-a.index__row:hover .index__status { color: var(--accent); }
-
-.is-pending .index__num,
-.is-pending .index__name { color: var(--muted); }
-
-/* ---------- One challenge block ---------- */
+/* ---------- Challenges ---------- */
 
 .challenge {
-    display: grid;
-    grid-template-columns: 4fr 8fr;
-    gap: var(--gutter);
-    padding: clamp(3.5rem, 9vh, 6rem) 0;
-    border-bottom: 1px solid var(--rule);
+    padding: clamp(4rem, 12vh, 7rem) var(--gutter) 0;
 }
 
-.challenge:first-of-type { margin-top: clamp(3rem, 8vh, 5rem); }
-
-/* The text column sticks while the chart scrolls past */
-.challenge__text {
-    position: sticky;
-    top: 5rem;
-    align-self: start;
+.challenge__head {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(1rem, 3vw, 2rem);
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--ink);
 }
 
 .challenge__num {
-    margin: 0 0 1.5rem;
+    margin: 0;
     font-weight: 300;
     font-stretch: 112%;
-    font-size: clamp(4rem, 8vw, 7rem);
-    line-height: 0.8;
-    font-variant-numeric: tabular-nums;
+    font-size: clamp(4.5rem, 10vw, 8rem);
+    line-height: 0.75;
     color: var(--accent);
 }
 
-.challenge h3 {
+.challenge__head h2 {
+    margin: 0;
+    font-weight: 700;
+    font-stretch: 72%;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+}
+
+.challenge__about {
+    margin: 0.4rem 0 0;
+    color: var(--muted);
+}
+
+/* One section / task: text on the left, chart on the right */
+.entry {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: var(--gutter);
+    align-items: start;
+    padding: clamp(2.5rem, 7vh, 4.5rem) 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.entry__text h3 {
     margin: 0 0 0.75rem;
     font-weight: 650;
-    font-stretch: 80%;
-    font-size: clamp(1.6rem, 2.6vw, 2.25rem);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
+    font-stretch: 85%;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    line-height: 1.1;
 }
 
-.challenge__skills {
-    margin: 0 0 1.5rem;
-    font-size: 0.95rem;
-    color: var(--muted);
-}
-
-.challenge__body p {
-    margin: 0 0 1em;
-    max-width: 46ch;
+.entry__text p {
+    margin: 0 0 0.75rem;
+    max-width: 44ch;
     font-family: var(--serif);
-    font-size: 1.125rem;
-    line-height: 1.65;
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
-.challenge__takeaway {
-    margin: 1.75rem 0 0;
-    max-width: 40ch;
-    padding-left: 1rem;
-    border-left: 3px solid var(--accent);
-    font-weight: 500;
-    line-height: 1.45;
-}
-
-.challenge__takeaway > span:first-child {
-    display: block;
-    margin-bottom: 0.2rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--accent);
-}
-
-/* Prompts to replace with your own commentary */
-.challenge__body .todo,
-.challenge__takeaway .todo,
-.chart-note.todo {
-    font-style: italic;
+.entry__text .entry__source,
+.entry__text .entry__links {
+    font-family: var(--sans);
+    font-size: 0.9rem;
     color: var(--muted);
 }
 
-.challenge__chart {
-    margin: 0;
-    min-width: 0; /* lets wide charts scroll inside the plate instead of breaking the grid */
-}
+.entry__links { margin-top: 1.25rem; }
 
-.plate {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 320px;
-    padding: clamp(1rem, 3vw, 2.5rem);
-    overflow-x: auto;
-    background: var(--plate);
-    border-radius: 4px;
-}
-
-/* vegaEmbed adds class="vega-embed" (inline-block) to the plate; keep it full width */
-.plate.vega-embed {
-    display: flex;
-    width: 100%;
-}
-
-.plate__error {
-    max-width: 40ch;
-    margin: 0;
-    text-align: center;
-    color: #5C6372; /* fixed: the plate is always light */
-}
-
-/* Links row under each chart: Chart JSON, Data, Source (built by the script) */
-.chart-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.9rem;
-}
-
-.chart-links a {
+.entry__links a {
+    display: inline-block;
     padding: 0.3rem 0.8rem;
     border: 1px solid var(--rule);
     border-radius: 999px;
-    font-size: 0.85rem;
     font-weight: 500;
+    color: var(--ink);
     text-decoration: none;
 }
 
-.chart-links a:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-}
+.entry__links a:hover { border-color: var(--accent); color: var(--accent); }
 
-/* Method note: units, coverage, retrieval date */
-.chart-note {
-    max-width: 70ch;
-    margin-top: 0.9rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: var(--muted);
-}
+/* Prompts to replace with your own writing */
+.todo { font-style: italic; color: var(--muted); }
 
-.challenge__chart + .challenge__chart { margin-top: 3rem; }
+/* The chart's figure: no box, so the white chart sits straight on the white page */
+.entry__chart {
+    margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;   /* wide charts scroll instead of breaking the layout */
+}
 
 /* ---------- Footer ---------- */
 
 .footer {
-    padding: clamp(5rem, 15vh, 10rem) var(--gutter) 2rem;
+    padding: clamp(5rem, 15vh, 9rem) var(--gutter) 2rem;
 }
 
 .footer__lead {
-    margin: 0 0 2rem;
+    margin: 0 0 1.5rem;
     font-weight: 700;
     font-stretch: 72%;
-    font-size: clamp(3rem, 10vw, 8rem);
+    font-size: clamp(3rem, 10vw, 7.5rem);
     line-height: 0.9;
     letter-spacing: -0.025em;
 }
@@ -406,9 +300,7 @@ a.index__row:hover .index__status { color: var(--accent); }
     display: flex;
     flex-wrap: wrap;
     gap: 1rem 2.5rem;
-    margin: 0 0 5rem;
-    padding: 0;
-    list-style: none;
+    margin: 0 0 4rem;
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 
@@ -422,28 +314,24 @@ a.index__row:hover .index__status { color: var(--accent); }
 
 /* ---------- Smaller screens ---------- */
 
-@media (max-width: 900px) {
-    .challenge { grid-template-columns: 1fr; }
-    .challenge__text { position: static; }
-    .challenge__num { margin-bottom: 1rem; }
+@media (max-width: 960px) {
+    .entry { grid-template-columns: minmax(0, 1fr); }
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-right: var(--gutter);
+        min-height: 0;
+    }
 }
 
-@media (max-width: 720px) {
-    .topbar__social { display: none; } /* still in the footer */
+@media (max-width: 600px) {
     .topbar { font-size: 0.875rem; }
-    .topbar__nav { gap: 0.9rem; }
-
-    .hero__meta,
-    .work__head { grid-template-columns: 1fr; }
-
-    .index__row { grid-template-columns: 2.5rem minmax(0, 1fr); row-gap: 0.15rem; }
-    .index__skills,
-    .index__status { grid-column: 2; text-align: left; }
-    .index__skills:empty { display: none; }
+    .topbar__extra { display: none; }
 }
 
 /* Respect visitors who turn off motion */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .hero__title span { animation: none; }
+    .hero__line { animation: none; stroke-dashoffset: 0; }
+    .hero__band { animation: none; opacity: 0.1; }
+    .hero__dot { animation: none; opacity: 1; }
 }
