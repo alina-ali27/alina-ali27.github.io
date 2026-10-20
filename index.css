@@ -19,10 +19,10 @@
     color-scheme: light;
 }
 
-/* Dark mode follows the visitor's system setting.
+/* Dark mode: follows the visitor's system setting unless they pick one with the toggle.
    Chart plates stay light so Vega-Lite's dark text stays readable. */
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
         --paper: #13161D;
         --ink: #E9EBEF;
         --muted: #9BA2AF;
@@ -31,6 +31,16 @@
         --plate: #F5F6F8;
         color-scheme: dark;
     }
+}
+
+:root[data-theme="dark"] {
+    --paper: #13161D;
+    --ink: #E9EBEF;
+    --muted: #9BA2AF;
+    --rule: #2B303B;
+    --accent: #8F9BFF;
+    --plate: #F5F6F8;
+    color-scheme: dark;
 }
 
 /* ---------- Base ---------- */
@@ -65,6 +75,19 @@ a:hover { color: var(--accent); }
     outline-offset: 3px;
 }
 
+/* Hidden until a keyboard user tabs to it */
+.skip-link {
+    position: absolute;
+    left: var(--gutter);
+    top: -3rem;
+    z-index: 20;
+    padding: 0.5rem 0.9rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+}
+.skip-link:focus { top: 0.75rem; color: var(--paper); }
+
 /* ---------- Top bar ---------- */
 
 .topbar {
@@ -81,12 +104,26 @@ a:hover { color: var(--accent); }
 
 .topbar a { text-decoration: none; }
 
+.topbar a,
+.theme-toggle { white-space: nowrap; }
+
 .topbar__name { font-weight: 600; }
 
 .topbar__nav {
     display: flex;
-    gap: clamp(1rem, 3vw, 2rem);
+    align-items: baseline;
+    gap: clamp(0.9rem, 2.5vw, 2rem);
 }
+
+.theme-toggle {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: var(--muted);
+    cursor: pointer;
+}
+.theme-toggle:hover { color: var(--accent); }
 
 /* ---------- Hero ---------- */
 
@@ -263,8 +300,27 @@ a.index__row:hover .index__status { color: var(--accent); }
     line-height: 1.65;
 }
 
+.challenge__takeaway {
+    margin: 1.75rem 0 0;
+    max-width: 40ch;
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent);
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.challenge__takeaway > span:first-child {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
 /* Prompts to replace with your own commentary */
-.challenge__body .todo {
+.challenge__body .todo,
+.challenge__takeaway .todo,
+.chart-note.todo {
     font-style: italic;
     color: var(--muted);
 }
@@ -285,6 +341,12 @@ a.index__row:hover .index__status { color: var(--accent); }
     border-radius: 4px;
 }
 
+/* vegaEmbed adds class="vega-embed" (inline-block) to the plate; keep it full width */
+.plate.vega-embed {
+    display: flex;
+    width: 100%;
+}
+
 .plate__error {
     max-width: 40ch;
     margin: 0;
@@ -292,11 +354,38 @@ a.index__row:hover .index__status { color: var(--accent); }
     color: #5C6372; /* fixed: the plate is always light */
 }
 
-.challenge__chart figcaption {
-    margin-top: 0.75rem;
+/* Links row under each chart: Chart JSON, Data, Source (built by the script) */
+.chart-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+}
+
+.chart-links a {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.chart-links a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Method note: units, coverage, retrieval date */
+.chart-note {
+    max-width: 70ch;
+    margin-top: 0.9rem;
     font-size: 0.875rem;
+    line-height: 1.5;
     color: var(--muted);
 }
+
+.challenge__chart + .challenge__chart { margin-top: 3rem; }
 
 /* ---------- Footer ---------- */
 
@@ -340,6 +429,10 @@ a.index__row:hover .index__status { color: var(--accent); }
 }
 
 @media (max-width: 720px) {
+    .topbar__social { display: none; } /* still in the footer */
+    .topbar { font-size: 0.875rem; }
+    .topbar__nav { gap: 0.9rem; }
+
     .hero__meta,
     .work__head { grid-template-columns: 1fr; }
 
