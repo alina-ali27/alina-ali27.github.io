@@ -1,0 +1,104 @@
+<!--
+  PP434 final project. Charts go in the <figure> elements, embedded the same way as the portfolio:
+  set a spec file name in the script at the bottom and call vegaEmbed for the figure's id.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PP434 project | Alina Ali</title>
+    <meta name="description" content="Alina Ali’s final project for Automated Data Visualisation (PP434) at LSE.">
+
+    <!-- Fonts: Archivo (headings and interface) + Source Serif 4 (longer text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+
+    <!-- One stylesheet shared by every page -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <!-- This is a link to the vega-lite packages which we're using to make graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
+</head>
+
+<body>
+
+    <!-- Top bar: the same on every page. aria-current marks the page you're on. -->
+    <header class="topbar">
+        <a class="topbar__home" href="index.html">Alina Ali</a>
+        <nav class="topbar__nav" aria-label="Main">
+            <a href="about.html">About</a>
+            <a href="portfolio.html">PP434 portfolio</a>
+            <a href="project.html" aria-current="page">PP434 project</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="page-head">
+            <h1>PP434 project</h1>
+            <p class="page-head__intro">
+                The final project for Automated Data Visualisation (PP434): a data-driven look at an AI governance question.
+            </p>
+            <p class="page-head__status">In progress</p>
+        </section>
+
+        <section class="challenge" aria-label="Project">
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>The question</h3>
+                    <p class="todo">What policy question are you answering, and who needs the answer?</p>
+                </div>
+                <div class="entry__text">
+                    <h3>The data</h3>
+                    <p class="todo">Which datasets you use, where they come from, and their main limitations.</p>
+                </div>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Chart 1</h3>
+                    <p class="todo">What this chart shows and what the reader should notice.</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                </div>
+                <!-- When the chart is ready, delete the placeholder <p> inside this figure
+                     and uncomment the two lines in the script below. -->
+                <figure class="entry__chart" id="Project1">
+                    <p class="chart-placeholder">Chart coming soon</p>
+                </figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>What it means for policy</h3>
+                    <p class="todo">Your findings, and what you would recommend.</p>
+                </div>
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <h2 class="footer__lead">Get in touch</h2>
+        <p class="footer__links">
+            <a href="mailto:you@example.com">Email</a>
+            <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
+            <a href="https://github.com/alina-ali27">GitHub</a>
+        </p>
+        <p class="footer__small">Built with HTML, CSS and Vega-Lite. Hosted on GitHub Pages.</p>
+    </footer>
+
+    <script>
+        // let project_1_spec = "project_chart1.json";
+        // vegaEmbed('#Project1', project_1_spec);
+    </script>
+
+</body>
+
+</html>
