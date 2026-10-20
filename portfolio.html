@@ -1,11 +1,16 @@
+<!--
+  PP434 portfolio (Automated Data Visualisation)
+  Charts are embedded exactly like the course template: each <figure> has an id,
+  and the script at the bottom calls vegaEmbed('#LocationX', spec) for it.
+-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About | Alina Ali</title>
-    <meta name="description" content="About Alina Ali: data science, public policy and AI governance.">
+    <title>PP434 portfolio | Alina Ali</title>
+    <meta name="description" content="Alina Ali’s chart portfolio for Automated Data Visualisation (PP434) at LSE.">
 
     <!-- Fonts: Archivo (headings and interface) + Source Serif 4 (longer text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +19,11 @@
 
     <!-- One stylesheet shared by every page -->
     <link rel="stylesheet" type="text/css" href="index.css">
+
+    <!-- This is a link to the vega-lite packages which we're using to make graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
 </head>
 
 <body>
@@ -22,222 +32,111 @@
     <header class="topbar">
         <a class="topbar__home" href="index.html">Alina Ali</a>
         <nav class="topbar__nav" aria-label="Main">
-            <a href="about.html" aria-current="page">About</a>
-            <a href="portfolio.html">PP434 portfolio</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html" aria-current="page">PP434 portfolio</a>
             <a href="project.html">PP434 project</a>
         </nav>
     </header>
 
     <main>
 
-        <!-- INTRO: portrait on the left, short bio on the right -->
-        <section class="about-intro">
-            <!-- To use a photo: put it in an images/ folder and replace the <span> below with
-                 <img src="images/alina.jpg" alt="Portrait of Alina Ali"> -->
-            <figure class="portrait">
-                <span class="portrait__initials" aria-hidden="true">AA</span>
-            </figure>
-
-            <div class="about-intro__text">
-                <h1 class="about-intro__title">About</h1>
-                <p class="about-intro__lede">
-                    I’m Alina. I work where quantitative methods meet public policy, and I’m most interested in
-                    how governments, especially middle powers, can govern AI and the compute behind it.
-                </p>
-                <p>
-                    I’m in the second year of the MPA in Data Science for Public Policy at LSE. Alongside my studies
-                    I work as a data scientist at Nostos, a Lloyd’s managing general agent underwriting political
-                    violence, terrorism and cyber risk, where I build Python data pipelines, underwriting automation,
-                    conflict risk analytics and actuarial models.
-                </p>
-                <p>
-                    Before LSE I studied Strategic Management and Business Analytics at McGill and spent a summer at
-                    PSP Investments. I grew up in the UAE. Long term, I want to work in tech policy and AI governance,
-                    at a frontier AI lab or a regulator.
-                </p>
-                <p class="about-intro__links">
-                    <a href="cv.pdf">Download CV</a>
-                    <a href="mailto:you@example.com">Email</a>
-                    <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
-                    <a href="https://github.com/alina-ali27">GitHub</a>
-                </p>
-            </div>
+        <!-- PAGE HEADER -->
+        <section class="page-head">
+            <h1>PP434 portfolio</h1>
+            <p class="page-head__intro">
+                Exercises for the Automated Data Visualisation class (PP434) at LSE, Autumn Term 2026/27.
+            </p>
+            <nav class="page-head__jump" aria-label="Challenges">
+                <a href="#challenge1">Challenge 1</a>
+                <a href="#challenge2">Challenge 2</a>
+            </nav>
         </section>
 
-        <!-- RIGHT NOW: a short list of what you're working on this year -->
-        <section class="now" aria-labelledby="now-title">
-            <h2 id="now-title">Right now</h2>
-            <ul class="now__list">
-                <li><strong>Capstone with the OECD</strong> on STIP Compass, strengthening the evidence base for science, technology and innovation policy.</li>
-                <li><strong>Claude Campus Ambassador</strong> for Anthropic, leading Campus Conversations on AI and society at LSE.</li>
-                <li><strong>Finalising a co-authored paper</strong> on AI proliferation and middle-power preparedness for arXiv.</li>
-                <li><strong>Data science at Nostos</strong>, part-time alongside the second year of the MPA.</li>
-            </ul>
-        </section>
-
-        <!-- TIMELINE: your CV as a chart.
-             Each row has a --start and --end year (decimals for months: 2025.75 = October 2025).
-             Add tl--ongoing to fade the bar out at the right for things that haven't ended.
-             The dates below are estimates: check and correct them. -->
-        <section class="timeline-section" aria-labelledby="timeline-title">
-            <div class="section-head">
-                <h2 id="timeline-title">Timeline</h2>
-                <ul class="legend" aria-label="Legend">
-                    <li class="legend--edu">Education</li>
-                    <li class="legend--work">Work</li>
-                    <li class="legend--research">Research</li>
-                    <li class="legend--community">Community</li>
-                </ul>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline__inner">
-                    <ol class="timeline__axis" aria-hidden="true">
-                        <li>2021</li><li>2022</li><li>2023</li><li>2024</li><li>2025</li><li>2026</li><li>2027</li>
-                    </ol>
-                    <ul class="timeline__rows">
-                        <li class="tl tl--edu" style="--start: 2021.67; --end: 2025.4;">
-                            <span class="tl__label">McGill University, BCom</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--work" style="--start: 2025.4; --end: 2025.67;">
-                            <span class="tl__label">PSP Investments</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--edu" style="--start: 2025.7; --end: 2027.45;">
-                            <span class="tl__label">LSE, MPA in Data Science for Public Policy</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--community tl--ongoing" style="--start: 2025.8; --end: 2027.6;">
-                            <span class="tl__label">AI Policy Reading Group, co-founder</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--research" style="--start: 2026.0; --end: 2026.8;">
-                            <span class="tl__label">Orion accelerator and AI proliferation paper</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--work tl--ongoing" style="--start: 2026.4; --end: 2027.6;">
-                            <span class="tl__label">Nostos, data science</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--research" style="--start: 2026.7; --end: 2027.45;">
-                            <span class="tl__label">OECD capstone</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--community tl--ongoing" style="--start: 2026.72; --end: 2027.6;">
-                            <span class="tl__label">Claude Campus Ambassador</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                    </ul>
+        <!-- ================= CHALLENGE 1 ================= -->
+        <section class="challenge" id="challenge1" aria-labelledby="challenge1-title">
+            <header class="challenge__head">
+                <p class="challenge__num" aria-hidden="true">1</p>
+                <div>
+                    <h2 id="challenge1-title">Challenge 1</h2>
+                    <p class="challenge__about">Displaying charts in your own site</p>
                 </div>
-            </div>
+            </header>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 1: Adding a chart using vega-embed</h3>
+                    <p class="todo">A sentence or two on what this chart shows and why you picked it.</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="wk1_chart1.json">Chart JSON</a></p>
+                </div>
+                <!-- This element will contain our vega-lite chart -->
+                <figure class="entry__chart" id="Location1"></figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 2: Adding a second chart using vega-embed</h3>
+                    <p class="todo">What does this second chart add to the first?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="wk1_chart2.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location2"></figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 3: Inflation in Pakistan</h3>
+                    <p class="todo">Which years stand out, and what was happening in Pakistan’s economy then?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="pak_inflation.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location3"></figure>
+            </article>
+
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Section 4: Unemployment in Pakistan</h3>
+                    <p class="todo">How does unemployment move alongside the inflation chart above?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="pak_unemp.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location4"></figure>
+            </article>
         </section>
 
-        <!-- CV DETAILS -->
-        <section class="cv" aria-label="Experience and education">
-            <div class="cv__col">
-                <h2>Experience</h2>
-                <ul class="cv__list">
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2026 to now</p>
-                        <div>
-                            <h4>Data science intern</h4>
-                            <p class="cv-item__org">Nostos, Lloyd’s MGA for political violence, terrorism and cyber</p>
-                        <p>Python data pipelines, underwriting automation and conflict risk analytics comparing Maplecroft and ACLED data. Predictive pricing models and a cyber insurance rater.</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2026</p>
-                        <div>
-                            <h4>Participant</h4>
-                            <p class="cv-item__org">Orion AI governance accelerator</p>
-                        <p>Research on middle powers and AI proliferation, now a co-authored paper.</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates">Summer 2025</p>
-                        <div>
-                            <h4><span class="todo">Your role title</span></h4>
-                            <p class="cv-item__org">PSP Investments</p>
-                        <p><span class="todo">One line on what you worked on.</span></p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <!-- ================= CHALLENGE 2 ================= -->
+        <section class="challenge" id="challenge2" aria-labelledby="challenge2-title">
+            <header class="challenge__head">
+                <p class="challenge__num" aria-hidden="true">2</p>
+                <div>
+                    <h2 id="challenge2-title">Challenge 2</h2>
+                    <p class="challenge__about">Building - Creating your own Visualizations</p>
+                </div>
+            </header>
 
-            <div class="cv__col">
-                <h2>Education</h2>
-                <ul class="cv__list">
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2025 to 2027</p>
-                        <div>
-                            <h4>MPA in Data Science for Public Policy</h4>
-                            <p class="cv-item__org">London School of Economics</p>
-                        <p>Coursework in econometrics, macroeconomics, political science, public economics, technology and data science policy, blockchain and digital assets, and data visualisation.</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"><span class="todo">2021 to 2025</span></p>
-                        <div>
-                            <h4>BCom, Strategic Management and Business Analytics</h4>
-                            <p class="cv-item__org">McGill University</p>
-                        <p>GPA 3.78.</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"></p>
-                        <div>
-                            <h4>International Baccalaureate</h4>
-                            <p class="cv-item__org"><span class="todo">Your school</span></p>
-                        <p>44 out of 45.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Task 1: Adapting a Vega-Lite example</h3>
+                    <p class="todo">Which example did you start from, and what did you change?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="test.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location5"></figure>
+            </article>
 
-            <div class="cv__col">
-                <h2>Leadership and community</h2>
-                <ul class="cv__list">
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2026 to now</p>
-                        <div>
-                            <h4>Claude Campus Ambassador</h4>
-                            <p class="cv-item__org">Anthropic</p>
-                        <p>Leading Campus Conversations on AI and society at LSE.</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"><span class="todo">2025 to now</span></p>
-                        <div>
-                            <h4>Co-founder</h4>
-                            <p class="cv-item__org">AI Policy Reading Group, LSE</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"></p>
-                        <div>
-                            <h4>Organiser</h4>
-                            <p class="cv-item__org">Anchor</p>
-                        <p>A community running social events for young professionals.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="cv__col">
-                <h2>Toolkit</h2>
-                <dl class="toolkit">
-                    <dt>Data and modelling</dt>
-                    <dd>Python (pandas, scikit-learn, XGBoost), GLMs, econometrics</dd>
-                    <dt>Visualisation</dt>
-                    <dd>Vega-Lite, Plotly dashboards, HTML and CSS</dd>
-                    <dt>Automation</dt>
-                    <dd>Playwright, Power Automate, Excel and VBA</dd>
-                    <dt>Writing and research</dt>
-                    <dd>LaTeX, policy writing, literature review</dd>
-                </dl>
-            </div>
+            <article class="entry">
+                <div class="entry__text">
+                    <h3>Task 2: Chocolate prices in the UK</h3>
+                    <p class="todo">Which time series did you use, and what edits did you make to the chart’s features?</p>
+                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
+                    <p class="entry__links"><a href="uk_choc_prices.json">Chart JSON</a></p>
+                </div>
+                <figure class="entry__chart" id="Location6"></figure>
+            </article>
         </section>
+
+        <!-- Adding Challenge 3? Copy a whole <section class="challenge">, change the ids
+             (challenge3, Location7...), add a jump link at the top, and add matching lines to the script below. -->
 
     </main>
 
@@ -250,6 +149,30 @@
         </p>
         <p class="footer__small">Built with HTML, CSS and Vega-Lite. Hosted on GitHub Pages.</p>
     </footer>
+
+    <script>
+        // ---------- Charts: same pattern as the course template ----------
+
+        // Challenge 1
+        let figure_1_spec = "wk1_chart1.json";
+        vegaEmbed('#Location1', figure_1_spec);
+
+        let figure_2_spec = "wk1_chart2.json";
+        vegaEmbed('#Location2', figure_2_spec);
+
+        let figure_3_spec = "pak_inflation.json";
+        vegaEmbed('#Location3', figure_3_spec);
+
+        let figure_4_spec = "pak_unemp.json";
+        vegaEmbed('#Location4', figure_4_spec);
+
+        // Challenge 2
+        let figure_5_spec = "test.json";
+        vegaEmbed('#Location5', figure_5_spec);
+
+        let figure_6_spec = "uk_choc_prices.json";
+        vegaEmbed('#Location6', figure_6_spec);
+    </script>
 
 </body>
 
