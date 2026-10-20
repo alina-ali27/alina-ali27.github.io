@@ -1,4 +1,5 @@
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+{
+"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
     "url": "https://raw.githubusercontent.com/MW17668/MW17668.github.io/main/myDataJuly1.csv"
   },
