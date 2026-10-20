@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
-<body>
+<body class="page--wash">
 
     <!-- Top bar: the same on every page. aria-current marks the page you're on. -->
     <header class="topbar">
@@ -30,214 +30,165 @@
 
     <main>
 
-        <!-- INTRO: portrait on the left, short bio on the right -->
-        <section class="about-intro">
-            <!-- To use a photo: put it in an images/ folder and replace the <span> below with
-                 <img src="images/alina.jpg" alt="Portrait of Alina Ali"> -->
-            <figure class="portrait">
-                <span class="portrait__initials" aria-hidden="true">AA</span>
-            </figure>
-
-            <div class="about-intro__text">
-                <h1 class="about-intro__title">About</h1>
-                <p class="about-intro__lede">
-                    I’m Alina. I work where quantitative methods meet public policy, and I’m most interested in
-                    how governments, especially middle powers, can govern AI and the compute behind it.
+        <!-- INTRO: bio on the left; portrait and quick facts on the right -->
+        <section class="about-hero">
+            <div class="about-hero__text">
+                <h1>Hi, I’m Alina.</h1>
+                <p class="about-hero__lede">
+                    I work where quantitative methods meet public policy, and I’m most interested in how
+                    governments, especially middle powers, can govern AI and the compute behind it.
                 </p>
                 <p>
                     I’m in the second year of the MPA in Data Science for Public Policy at LSE. Alongside my studies
                     I work as a data scientist at Nostos, a Lloyd’s managing general agent underwriting political
-                    violence, terrorism and cyber risk, where I build Python data pipelines, underwriting automation,
-                    conflict risk analytics and actuarial models.
+                    violence, terrorism and cyber risk, where I build data pipelines, underwriting automation and
+                    conflict risk analytics.
                 </p>
                 <p>
-                    Before LSE I studied Strategic Management and Business Analytics at McGill and spent a summer at
-                    PSP Investments. I grew up in the UAE. Long term, I want to work in tech policy and AI governance,
-                    at a frontier AI lab or a regulator.
+                    Before LSE I studied Strategic Management and Business Analytics at McGill and spent a summer
+                    at PSP Investments. I grew up in the UAE. Long term, I want to work in tech policy and AI
+                    governance, at a frontier AI lab or a regulator.
                 </p>
-                <p class="about-intro__links">
+                <p class="about-hero__links">
                     <a href="cv.pdf">Download CV</a>
                     <a href="mailto:you@example.com">Email</a>
                     <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
                     <a href="https://github.com/alina-ali27">GitHub</a>
                 </p>
             </div>
-        </section>
 
-        <!-- RIGHT NOW: a short list of what you're working on this year -->
-        <section class="now" aria-labelledby="now-title">
-            <h2 id="now-title">Right now</h2>
-            <ul class="now__list">
-                <li><strong>Capstone with the OECD</strong> on STIP Compass, strengthening the evidence base for science, technology and innovation policy.</li>
-                <li><strong>Claude Campus Ambassador</strong> for Anthropic, leading Campus Conversations on AI and society at LSE.</li>
-                <li><strong>Finalising a co-authored paper</strong> on AI proliferation and middle-power preparedness for arXiv.</li>
-                <li><strong>Data science at Nostos</strong>, part-time alongside the second year of the MPA.</li>
-            </ul>
-        </section>
+            <div class="about-hero__side">
+                <!-- To use a photo: put it in an images/ folder and replace the <span> with
+                     <img src="images/alina.jpg" alt="Portrait of Alina Ali"> -->
+                <figure class="portrait">
+                    <span class="portrait__initials" aria-hidden="true">AA</span>
+                </figure>
 
-        <!-- TIMELINE: your CV as a chart.
-             Each row has a --start and --end year (decimals for months: 2025.75 = October 2025).
-             Add tl--ongoing to fade the bar out at the right for things that haven't ended.
-             The dates below are estimates: check and correct them. -->
-        <section class="timeline-section" aria-labelledby="timeline-title">
-            <div class="section-head">
-                <h2 id="timeline-title">Timeline</h2>
-                <ul class="legend" aria-label="Legend">
-                    <li class="legend--edu">Education</li>
-                    <li class="legend--work">Work</li>
-                    <li class="legend--research">Research</li>
-                    <li class="legend--community">Community</li>
+                <ul class="facts">
+                    <li class="fact fact--accent"><span class="fact__value">AI governance</span><span class="fact__label">What I research</span></li>
+                    <li class="fact"><span class="fact__value">LSE</span><span class="fact__label">MPA, 2025–2027</span></li>
+                    <li class="fact"><span class="fact__value">Nostos</span><span class="fact__label">Where I work</span></li>
+                    <li class="fact"><span class="fact__value">UAE</span><span class="fact__label">Where I grew up</span></li>
                 </ul>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline__inner">
-                    <ol class="timeline__axis" aria-hidden="true">
-                        <li>2021</li><li>2022</li><li>2023</li><li>2024</li><li>2025</li><li>2026</li><li>2027</li>
-                    </ol>
-                    <ul class="timeline__rows">
-                        <li class="tl tl--edu" style="--start: 2021.67; --end: 2025.4;">
-                            <span class="tl__label">McGill University, BCom</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--work" style="--start: 2025.4; --end: 2025.67;">
-                            <span class="tl__label">PSP Investments</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--edu" style="--start: 2025.7; --end: 2027.45;">
-                            <span class="tl__label">LSE, MPA in Data Science for Public Policy</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--community tl--ongoing" style="--start: 2025.8; --end: 2027.6;">
-                            <span class="tl__label">AI Policy Reading Group, co-founder</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--research" style="--start: 2026.0; --end: 2026.8;">
-                            <span class="tl__label">Orion accelerator and AI proliferation paper</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--work tl--ongoing" style="--start: 2026.4; --end: 2027.6;">
-                            <span class="tl__label">Nostos, data science</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--research" style="--start: 2026.7; --end: 2027.45;">
-                            <span class="tl__label">OECD capstone</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                        <li class="tl tl--community tl--ongoing" style="--start: 2026.72; --end: 2027.6;">
-                            <span class="tl__label">Claude Campus Ambassador</span>
-                            <span class="tl__bar"></span>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </section>
 
-        <!-- CV DETAILS -->
-        <section class="cv" aria-label="Experience and education">
-            <div class="cv__col">
-                <h2>Experience</h2>
-                <ul class="cv__list">
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2026 to now</p>
-                        <div>
-                            <h4>Data science intern</h4>
-                            <p class="cv-item__org">Nostos, Lloyd’s MGA for political violence, terrorism and cyber</p>
-                        <p>Python data pipelines, underwriting automation and conflict risk analytics comparing Maplecroft and ACLED data. Predictive pricing models and a cyber insurance rater.</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2026</p>
-                        <div>
-                            <h4>Participant</h4>
-                            <p class="cv-item__org">Orion AI governance accelerator</p>
-                        <p>Research on middle powers and AI proliferation, now a co-authored paper.</p>
-                        </div>
-                    </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates">Summer 2025</p>
-                        <div>
-                            <h4><span class="todo">Your role title</span></h4>
-                            <p class="cv-item__org">PSP Investments</p>
-                        <p><span class="todo">One line on what you worked on.</span></p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <!-- CV: each section has its heading on the left and entries on the right.
+             Grey italic text marks details to fill in or check. -->
+        <div class="cv">
 
-            <div class="cv__col">
-                <h2>Education</h2>
-                <ul class="cv__list">
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2025 to 2027</p>
-                        <div>
-                            <h4>MPA in Data Science for Public Policy</h4>
-                            <p class="cv-item__org">London School of Economics</p>
-                        <p>Coursework in econometrics, macroeconomics, political science, public economics, technology and data science policy, blockchain and digital assets, and data visualisation.</p>
+            <section class="cv-section" aria-labelledby="edu">
+                <h2 id="edu">Education</h2>
+                <ol class="cv-list">
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>MPA, Data Science for Public Policy</h3>
+                            <p class="cv-entry__dates">2025–2027 (expected)</p>
                         </div>
+                        <p class="cv-entry__org">London School of Economics and Political Science</p>
+                        <p class="cv-entry__desc">Coursework in econometrics, macroeconomics, political science, public economics, technology and data science policy, blockchain and digital assets, and data visualisation.</p>
                     </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"><span class="todo">2021 to 2025</span></p>
-                        <div>
-                            <h4>BCom, Strategic Management and Business Analytics</h4>
-                            <p class="cv-item__org">McGill University</p>
-                        <p>GPA 3.78.</p>
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>BCom, Strategic Management and Business Analytics</h3>
+                            <p class="cv-entry__dates"><span class="todo">2021–2025</span></p>
                         </div>
+                        <p class="cv-entry__org">McGill University</p>
+                        <p class="cv-entry__desc">GPA 3.78.</p>
                     </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"></p>
-                        <div>
-                            <h4>International Baccalaureate</h4>
-                            <p class="cv-item__org"><span class="todo">Your school</span></p>
-                        <p>44 out of 45.</p>
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>International Baccalaureate, 44/45</h3>
+                            <p class="cv-entry__dates"><span class="todo">Years</span></p>
                         </div>
+                        <p class="cv-entry__org"><span class="todo">Your school</span></p>
                     </li>
-                </ul>
-            </div>
+                </ol>
+            </section>
 
-            <div class="cv__col">
-                <h2>Leadership and community</h2>
-                <ul class="cv__list">
-                    <li class="cv-item">
-                        <p class="cv-item__dates">2026 to now</p>
-                        <div>
-                            <h4>Claude Campus Ambassador</h4>
-                            <p class="cv-item__org">Anthropic</p>
-                        <p>Leading Campus Conversations on AI and society at LSE.</p>
+            <section class="cv-section" aria-labelledby="exp">
+                <h2 id="exp">Experience</h2>
+                <ol class="cv-list">
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>Data Science Intern</h3>
+                            <p class="cv-entry__dates"><span class="todo">Month</span> 2026–present</p>
                         </div>
+                        <p class="cv-entry__org">Nostos, a Lloyd’s MGA for political violence, terrorism and cyber</p>
+                        <p class="cv-entry__desc">Python data pipelines and underwriting automation. Conflict risk analytics comparing Maplecroft and ACLED data, interactive Plotly dashboards, predictive pricing models and a cyber insurance rater.</p>
                     </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"><span class="todo">2025 to now</span></p>
-                        <div>
-                            <h4>Co-founder</h4>
-                            <p class="cv-item__org">AI Policy Reading Group, LSE</p>
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3><span class="todo">Your role title</span></h3>
+                            <p class="cv-entry__dates">Summer 2025</p>
                         </div>
+                        <p class="cv-entry__org">PSP Investments</p>
+                        <p class="cv-entry__desc"><span class="todo">One line on what you worked on.</span></p>
                     </li>
-                    <li class="cv-item">
-                        <p class="cv-item__dates"></p>
-                        <div>
-                            <h4>Organiser</h4>
-                            <p class="cv-item__org">Anchor</p>
-                        <p>A community running social events for young professionals.</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                </ol>
+            </section>
 
-            <div class="cv__col">
-                <h2>Toolkit</h2>
-                <dl class="toolkit">
-                    <dt>Data and modelling</dt>
-                    <dd>Python (pandas, scikit-learn, XGBoost), GLMs, econometrics</dd>
-                    <dt>Visualisation</dt>
-                    <dd>Vega-Lite, Plotly dashboards, HTML and CSS</dd>
-                    <dt>Automation</dt>
-                    <dd>Playwright, Power Automate, Excel and VBA</dd>
-                    <dt>Writing and research</dt>
-                    <dd>LaTeX, policy writing, literature review</dd>
+            <section class="cv-section" aria-labelledby="res">
+                <h2 id="res">Research</h2>
+                <ol class="cv-list">
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>Co-author, middle powers and AI proliferation</h3>
+                            <p class="cv-entry__dates">2026</p>
+                        </div>
+                        <p class="cv-entry__org">Orion AI governance accelerator</p>
+                        <p class="cv-entry__desc">Argues that middle powers should move from preventing AI proliferation to national preparedness across detection, escalation and containment. Forthcoming on arXiv.</p>
+                    </li>
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>Capstone, STIP Compass</h3>
+                            <p class="cv-entry__dates">2026–2027</p>
+                        </div>
+                        <p class="cv-entry__org">OECD</p>
+                        <p class="cv-entry__desc">Strengthening the evidence base for science, technology and innovation policy.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="cv-section" aria-labelledby="lead">
+                <h2 id="lead">Leadership</h2>
+                <ol class="cv-list">
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>Claude Campus Ambassador</h3>
+                            <p class="cv-entry__dates">2026–present</p>
+                        </div>
+                        <p class="cv-entry__org">Anthropic</p>
+                        <p class="cv-entry__desc">Leading Campus Conversations on AI and society at LSE.</p>
+                    </li>
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>Co-founder</h3>
+                            <p class="cv-entry__dates"><span class="todo">Year</span>–present</p>
+                        </div>
+                        <p class="cv-entry__org">AI Policy Reading Group, LSE</p>
+                    </li>
+                    <li class="cv-entry">
+                        <div class="cv-entry__head">
+                            <h3>Organiser</h3>
+                            <p class="cv-entry__dates"><span class="todo">Years</span></p>
+                        </div>
+                        <p class="cv-entry__org">Anchor</p>
+                        <p class="cv-entry__desc">A community running social events for young professionals.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="cv-section" aria-labelledby="skills">
+                <h2 id="skills">Skills</h2>
+                <dl class="skills">
+                    <div><dt>Data and modelling</dt><dd>Python (pandas, scikit-learn, XGBoost), GLMs, econometrics</dd></div>
+                    <div><dt>Visualisation</dt><dd>Vega-Lite, Plotly dashboards, HTML and CSS</dd></div>
+                    <div><dt>Automation</dt><dd>Playwright, Power Automate, Excel and VBA</dd></div>
+                    <div><dt>Research and writing</dt><dd>LaTeX, policy writing, literature review</dd></div>
                 </dl>
-            </div>
-        </section>
+            </section>
+        </div>
 
     </main>
 
