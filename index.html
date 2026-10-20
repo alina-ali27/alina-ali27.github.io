@@ -2,8 +2,15 @@
 <!--
   Alina Ali: policy data portfolio (Automated Data Vis)
   Structure lives here; all styling lives in index.css (same folder).
-  Charts are embedded automatically: any element with a data-spec="file.json"
-  attribute gets a Vega-Lite chart (see the loop in the script at the bottom).
+
+  HOW CHARTS WORK ON THIS PAGE
+  Each chart is a <div class="plate"> with a few attributes:
+    data-spec="file.json"            your Vega-Lite spec (required)
+    data-source="https://..."        where the original data comes from (optional)
+    data-source-label="World Bank"   text for that link (optional, defaults to "Source")
+    data-data="data/file.csv"        only if you want to override the data link (optional)
+  The script at the bottom loops over every plate, embeds the chart with vegaEmbed,
+  and builds its links row: Chart JSON, Data (read from the spec's data.url) and Source.
 -->
 <html lang="en">
 
@@ -13,14 +20,22 @@
     <title>Alina Ali | Data science for public policy</title>
     <meta name="description" content="Portfolio of policy charts by Alina Ali, MPA in Data Science for Public Policy at LSE.">
 
-    <!-- Fonts: Archivo (headings and interface, has a variable width axis) + Source Serif 4 (commentary) -->
+    <!-- Apply a saved light/dark choice before the page draws, so it doesn't flash -->
+    <script>
+        try {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+        } catch (e) { }
+    </script>
+
+    <!-- Fonts: Archivo (headings and interface) + Source Serif 4 (commentary) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="index.css">
 
-    <!-- Vega-Lite libraries for the charts -->
+    <!-- Vega-Lite libraries for the charts (same versions as the course template) -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
@@ -28,13 +43,17 @@
 
 <body>
 
+    <a class="skip-link" href="#challenges">Skip to the charts</a>
+
     <!-- Top bar: stays pinned while scrolling -->
     <header class="topbar">
         <a class="topbar__name" href="#top">Alina Ali</a>
         <nav class="topbar__nav" aria-label="Main">
-            <a href="#challenges">Challenges</a>
-            <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
-            <a href="https://github.com/alina-ali27">GitHub</a>
+            <a href="#challenges">Portfolio</a>
+            <a href="project.html">Final project</a>
+            <a class="topbar__social" href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
+            <a class="topbar__social" href="https://github.com/alina-ali27">GitHub</a>
+            <button class="theme-toggle" type="button" id="themeToggle">Dark mode</button>
         </nav>
     </header>
 
@@ -61,8 +80,8 @@
             <div class="work__head">
                 <h2 class="work__title" id="work-title">Ten challenges</h2>
                 <p class="work__intro">
-                    Each challenge practises one or two data visualisation skills and ends with a live chart,
-                    from cleaning and hosting data to APIs, scrapers, interactivity and LLMs.
+                    Each challenge practises one or two data visualisation skills and ends with a live chart.
+                    Every chart links to its Vega-Lite spec, the data behind it and the original source.
                 </p>
             </div>
 
@@ -133,9 +152,10 @@
 
             <!--
               ONE BLOCK PER CHALLENGE
-              To add a new one: copy an <article>, change its id (c7, c8...), the number, the text,
-              and the data-spec file name. No JavaScript changes needed: the loop finds it.
-              The grey italic paragraphs (class="todo") are prompts to replace with your own writing.
+              To add one: copy an <article>, change its id (c7, c8...), the number, the text,
+              and the plate's data-spec / data-source. No JavaScript changes needed.
+              Grey italic text (class="todo") marks prompts to replace with your own writing.
+              A challenge with two charts? Wrap both <figure class="challenge__chart"> elements in one <div> so they share the right-hand column.
             -->
 
             <article class="challenge" id="c1">
@@ -146,10 +166,12 @@
                     <div class="challenge__body">
                         <p class="todo">Say what the chart shows and why it matters for policy in two or three sentences. Which years stand out, and what was happening then?</p>
                     </div>
+                    <p class="challenge__takeaway"><span>Takeaway</span> <span class="todo">The one sentence you want a policymaker to remember.</span></p>
                 </div>
                 <figure class="challenge__chart">
-                    <div class="plate" data-spec="pak_inflation.json"></div>
-                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                    <div class="plate" data-spec="pak_inflation.json" data-source="" data-source-label="Source"></div>
+                    <div class="chart-links" aria-label="Chart resources"></div>
+                    <figcaption class="chart-note todo">Units, time span and when you downloaded the data, e.g. annual CPI inflation, %, 1990–2024. Retrieved October 2026.</figcaption>
                 </figure>
             </article>
 
@@ -159,12 +181,14 @@
                     <h3>Unemployment in Pakistan</h3>
                     <p class="challenge__skills">Skills: hosting data in the cloud</p>
                     <div class="challenge__body">
-                        <p class="todo">How does unemployment move alongside inflation in the chart above? Point the reader to the one pattern you want them to notice.</p>
+                        <p class="todo">How does unemployment move alongside inflation in challenge 1? Point the reader to the one pattern you want them to notice.</p>
                     </div>
+                    <p class="challenge__takeaway"><span>Takeaway</span> <span class="todo">The one sentence you want a policymaker to remember.</span></p>
                 </div>
                 <figure class="challenge__chart">
-                    <div class="plate" data-spec="pak_unemp.json"></div>
-                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                    <div class="plate" data-spec="pak_unemp.json" data-source="" data-source-label="Source"></div>
+                    <div class="chart-links" aria-label="Chart resources"></div>
+                    <figcaption class="chart-note todo">Units, time span and retrieval date.</figcaption>
                 </figure>
             </article>
 
@@ -178,8 +202,9 @@
                     </div>
                 </div>
                 <figure class="challenge__chart">
-                    <div class="plate" data-spec="wk1_chart1.json"></div>
-                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                    <div class="plate" data-spec="wk1_chart1.json" data-source="" data-source-label="Original JSON"></div>
+                    <div class="chart-links" aria-label="Chart resources"></div>
+                    <figcaption class="chart-note todo">Note any cleaning steps, e.g. rows removed or units converted.</figcaption>
                 </figure>
             </article>
 
@@ -193,8 +218,9 @@
                     </div>
                 </div>
                 <figure class="challenge__chart">
-                    <div class="plate" data-spec="wk1_chart2.json"></div>
-                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                    <div class="plate" data-spec="wk1_chart2.json" data-source="" data-source-label="Original data"></div>
+                    <div class="chart-links" aria-label="Chart resources"></div>
+                    <figcaption class="chart-note todo">Name the API and the date of the latest data point.</figcaption>
                 </figure>
             </article>
 
@@ -208,8 +234,9 @@
                     </div>
                 </div>
                 <figure class="challenge__chart">
-                    <div class="plate" data-spec="test.json"></div>
-                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                    <div class="plate" data-spec="test.json" data-source="" data-source-label="Source"></div>
+                    <div class="chart-links" aria-label="Chart resources"></div>
+                    <figcaption class="chart-note todo">Units, coverage and retrieval date.</figcaption>
                 </figure>
             </article>
 
@@ -221,10 +248,12 @@
                     <div class="challenge__body">
                         <p class="todo">What did you scrape, from where, and what does the price trend say about the cost of living?</p>
                     </div>
+                    <p class="challenge__takeaway"><span>Takeaway</span> <span class="todo">The one sentence you want a policymaker to remember.</span></p>
                 </div>
                 <figure class="challenge__chart">
-                    <div class="plate" data-spec="uk_choc_prices.json"></div>
-                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                    <div class="plate" data-spec="uk_choc_prices.json" data-source="" data-source-label="Scraped page"></div>
+                    <div class="chart-links" aria-label="Chart resources"></div>
+                    <figcaption class="chart-note todo">Which page you scraped, how often, and the date of your snapshot.</figcaption>
                 </figure>
             </article>
 
@@ -242,8 +271,27 @@
     </footer>
 
     <script>
-        // A shared look for every chart, so they match the page's fonts and colours.
-        // Anything set inside an individual .json spec still wins over this.
+        // ---------- Light / dark toggle ----------
+        const toggle = document.getElementById("themeToggle");
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+        function currentTheme() {
+            return document.documentElement.dataset.theme || (systemDark.matches ? "dark" : "light");
+        }
+        function updateToggleLabel() {
+            // The label names what clicking will do
+            toggle.textContent = currentTheme() === "dark" ? "Light mode" : "Dark mode";
+        }
+        toggle.addEventListener("click", function () {
+            const next = currentTheme() === "dark" ? "light" : "dark";
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem("theme", next); } catch (e) { }
+            updateToggleLabel();
+        });
+        updateToggleLabel();
+
+        // ---------- Shared chart look ----------
+        // Matches the page's fonts and colours. Anything set inside a .json spec still wins.
         const chartTheme = {
             font: "Archivo, Helvetica Neue, Arial, sans-serif",
             background: "transparent",
@@ -264,17 +312,62 @@
             range: { category: ["#2B3CE0", "#E2711D", "#2A9D8F", "#B83280", "#7A8190", "#E9C46A"] }
         };
 
-        // The loop: find every element with a data-spec attribute and embed its chart there.
-        document.querySelectorAll("[data-spec]").forEach(function (el) {
-            const spec = el.dataset.spec;
+        // ---------- Finding the data file inside a spec ----------
+        // Looks at the top-level data first, then inside layered, concatenated or faceted charts.
+        function findDataUrl(spec) {
+            if (!spec || typeof spec !== "object") return null;
+            if (spec.data && spec.data.url) return spec.data.url;
+            const children = [].concat(spec.layer || [], spec.vconcat || [], spec.hconcat || [], spec.concat || []);
+            for (const child of children) {
+                const found = findDataUrl(child);
+                if (found) return found;
+            }
+            return spec.spec ? findDataUrl(spec.spec) : null;
+        }
 
+        function addLink(container, href, label, external) {
+            const a = document.createElement("a");
+            a.href = href;
+            a.textContent = label;
+            if (external) a.rel = "noopener";
+            container.appendChild(a);
+        }
+
+        // ---------- The loop: embed every chart and build its links ----------
+        document.querySelectorAll(".plate[data-spec]").forEach(async function (el) {
+            const specFile = el.dataset.spec;
+            const links = el.closest("figure").querySelector(".chart-links");
+
+            // 1. Read the spec ourselves so we can find its data file
+            let spec = null;
+            try {
+                const response = await fetch(specFile);
+                if (!response.ok) throw new Error(response.status + " " + response.statusText);
+                spec = await response.json();
+            } catch (error) {
+                console.error(specFile, error);
+            }
+
+            // 2. Build the links row: Chart JSON, Data, Source
+            if (links) {
+                addLink(links, specFile, "Chart JSON");
+                const dataUrl = el.dataset.data || findDataUrl(spec);
+                if (dataUrl) addLink(links, dataUrl, "Data");
+                if (el.dataset.source) addLink(links, el.dataset.source, el.dataset.sourceLabel || "Source", true);
+            }
+
+            // 3. Draw the chart with vegaEmbed, same as the course template
+            if (!spec) {
+                el.innerHTML = '<p class="plate__error">This chart didn’t load. Check that '
+                    + specFile + ' is in the same folder as index.html, then refresh the page.</p>';
+                return;
+            }
             // actions: false hides the "..." menu. Set it to true to show View Source / Open in Editor.
-            vegaEmbed(el, spec, { actions: false, config: chartTheme })
-                .catch(function (error) {
-                    console.error(spec, error);
-                    el.innerHTML = '<p class="plate__error">This chart didn’t load. Check that '
-                        + spec + ' is in the same folder as index.html, then refresh the page.</p>';
-                });
+            vegaEmbed(el, spec, { actions: false, config: chartTheme }).catch(function (error) {
+                console.error(specFile, error);
+                el.innerHTML = '<p class="plate__error">' + specFile
+                    + ' loaded, but Vega-Lite couldn’t draw it. Open the browser console to see the error.</p>';
+            });
         });
     </script>
 
