@@ -1,185 +1,283 @@
 <!DOCTYPE html>
-<!-- This HTML file provides a simple example of a portfolio page. It contains a header, a few sections, and a few charts. -->
-<!-- It works with the three css files in this folder: example1.css, example2.css and example3.css. -->
-<!-- The HTML file defines the structure of the page, and the CSS files define how it looks. -->
-<!-- The CSS examples are all designed to work with this page. Try swapping them out on line 29 and see what happens. -->
+<!--
+  Alina Ali: policy data portfolio (Automated Data Vis)
+  Structure lives here; all styling lives in index.css (same folder).
+  Charts are embedded automatically: any element with a data-spec="file.json"
+  attribute gets a Vega-Lite chart (see the loop in the script at the bottom).
+-->
+<html lang="en">
 
-<!-- Take a look around and make your own copy to adapt for your own use. -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alina Ali | Data science for public policy</title>
+    <meta name="description" content="Portfolio of policy charts by Alina Ali, MPA in Data Science for Public Policy at LSE.">
 
-<!-- This is a comment -->
-<!-- Comments are not displayed in the browser -->
-<!-- They can be used to leave notes in the code -->
+    <!-- Fonts: Archivo (headings and interface, has a variable width axis) + Source Serif 4 (commentary) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
 
-<html> 
-    <!-- HTML is heirarchial: tags like this define elements on the page. 
-    Each tag does something different. For example:
-        - The <html> tag defines the whole document.
-        - The <h1> tag defines a large heading
-        - The <p> tag defines a paragraph
-        - Tags appear as an opening <div> and closing </div> pair
-    -->
+    <link rel="stylesheet" href="index.css">
 
-<head>    
-    <!-- The head tag links to resources our page needs and defines information about it. Tags in the <head> aren't displayed on the page. -->
-
-    <!-- This is a link to a stylesheet which contains rules about how each element on the page should be defined-->
-    <!-- Try swapping to example3.css or another, and take a look at each example.css to see if you understand it-->
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <title>My Portfolio</title> <!-- The title displayed in the browser tab, not on the page itself -->
-
-    <!-- This is a link to the vega-lite packages which we're using to make graphs -->
+    <!-- Vega-Lite libraries for the charts -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
-
-    <style>
-        /* CSS styles can be defined here, or in a separate CSS file */
-        #chartGrid {
-            display: flex;
-        }
-        
-    </style>
 </head>
 
-<body> 
-<!-- The body tag contains the elements that visitors to our page will see. -->
-    <h1 class="big" style="margin-bottom: 0px;"> <!-- We have added a class to the header called "big" which we can use to style it in the CSS -->
-        <!-- This is a header, it is the largest text on the page -->
-        Alina Ali
-    </h1>
-    <p style="margin-top: 0px; color: darkblue">
-        <!-- we're setting the margin to 0px so the header and authour name are close together -->
-        Alina Ali | <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a> | <a
-            href="https://github.com/alina-ali27">GitHub</a>
-    </p>
-    <h3 class="small"> <!-- We have added a class to the header called "small" which we can use to style it in the CSS -->
-        This page acts as your portfolio of charts. You can use it as a good starting point to display your work but make sure to customise it to make it your own, or even start from scratch.  
-    </h3>
+<body>
 
-    <!-- We're organising the page into sections, with each section containing a chart, title and a description -->
-    <section>
-        <div class="chart-description">
-            <h2>Section 1: A basic chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
-            </p>
-        </div>
+    <!-- Top bar: stays pinned while scrolling -->
+    <header class="topbar">
+        <a class="topbar__name" href="#top">Alina Ali</a>
+        <nav class="topbar__nav" aria-label="Main">
+            <a href="#challenges">Challenges</a>
+            <a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a>
+            <a href="https://github.com/alina-ali27">GitHub</a>
+        </nav>
+    </header>
 
-        <!-- This element will contain our vega-lite chart -->
-        <figure id="Location1"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+    <main id="top">
 
-    </section>
+        <!-- HERO: one big statement, like a poster -->
+        <section class="hero">
+            <h1 class="hero__title">
+                <span>Data science</span>
+                <span>for public</span>
+                <span>policy.</span>
+            </h1>
 
-     <section>
-        <div class="chart-description">
-            <h2>Section 2: A basic chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
-            </p>
-        </div>
+            <div class="hero__meta">
+                <p>MPA in Data Science for Public Policy at the London School of Economics.</p>
+                <p>Charts built for Automated Data Vis, 2026/27.</p>
+                <p>Working where quantitative methods meet public policy and AI governance.</p>
+            </div>
+        </section>
 
-        <!-- This element will contain our vega-lite chart -->
-        <figure id="Location2"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+        <!-- CHALLENGES: an index of all ten, then one block per chart -->
+        <section class="work" id="challenges" aria-labelledby="work-title">
 
-    </section>
+            <div class="work__head">
+                <h2 class="work__title" id="work-title">Ten challenges</h2>
+                <p class="work__intro">
+                    Each challenge practises one or two data visualisation skills and ends with a live chart,
+                    from cleaning and hosting data to APIs, scrapers, interactivity and LLMs.
+                </p>
+            </div>
 
-    <section>
-        <div class="chart-description">
-            <h2>Section 3: A basic chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
-            </p>
-        </div>
+            <!-- The index. Finished challenges link to their section; the rest are greyed out.
+                 When you finish one, swap its <div class="index__row"> for an <a class="index__row" href="#cX">. -->
+            <ol class="index">
+                <li><a class="index__row" href="#c1">
+                    <span class="index__num">1</span>
+                    <span class="index__name">Inflation in Pakistan</span>
+                    <span class="index__skills">Building a website, embedding a live chart</span>
+                    <span class="index__status">View chart</span>
+                </a></li>
+                <li><a class="index__row" href="#c2">
+                    <span class="index__num">2</span>
+                    <span class="index__name">Unemployment in Pakistan</span>
+                    <span class="index__skills">Hosting data in the cloud</span>
+                    <span class="index__status">View chart</span>
+                </a></li>
+                <li><a class="index__row" href="#c3">
+                    <span class="index__num">3</span>
+                    <span class="index__name">Week 1 practice chart</span>
+                    <span class="index__skills">Editing and cleaning data</span>
+                    <span class="index__status">View chart</span>
+                </a></li>
+                <li><a class="index__row" href="#c4">
+                    <span class="index__num">4</span>
+                    <span class="index__name">Week 1 practice chart, part two</span>
+                    <span class="index__skills">API-driven charts</span>
+                    <span class="index__status">View chart</span>
+                </a></li>
+                <li><a class="index__row" href="#c5">
+                    <span class="index__num">5</span>
+                    <span class="index__name">Test chart</span>
+                    <span class="index__skills">Loops and APIs</span>
+                    <span class="index__status">View chart</span>
+                </a></li>
+                <li><a class="index__row" href="#c6">
+                    <span class="index__num">6</span>
+                    <span class="index__name">Chocolate prices in the UK</span>
+                    <span class="index__skills">Scrapers</span>
+                    <span class="index__status">View chart</span>
+                </a></li>
+                <li class="is-pending"><div class="index__row">
+                    <span class="index__num">7</span>
+                    <span class="index__name">Critical commentary on data</span>
+                    <span class="index__skills"></span>
+                    <span class="index__status">In progress</span>
+                </div></li>
+                <li class="is-pending"><div class="index__row">
+                    <span class="index__num">8</span>
+                    <span class="index__name">Advanced analytics</span>
+                    <span class="index__skills"></span>
+                    <span class="index__status">In progress</span>
+                </div></li>
+                <li class="is-pending"><div class="index__row">
+                    <span class="index__num">9</span>
+                    <span class="index__name">Interactivity</span>
+                    <span class="index__skills"></span>
+                    <span class="index__status">In progress</span>
+                </div></li>
+                <li class="is-pending"><div class="index__row">
+                    <span class="index__num">10</span>
+                    <span class="index__name">LLMs</span>
+                    <span class="index__skills"></span>
+                    <span class="index__status">In progress</span>
+                </div></li>
+            </ol>
 
-        <!-- This element will contain our vega-lite chart -->
-        <figure id="Location3"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+            <!--
+              ONE BLOCK PER CHALLENGE
+              To add a new one: copy an <article>, change its id (c7, c8...), the number, the text,
+              and the data-spec file name. No JavaScript changes needed: the loop finds it.
+              The grey italic paragraphs (class="todo") are prompts to replace with your own writing.
+            -->
 
-    </section>
+            <article class="challenge" id="c1">
+                <div class="challenge__text">
+                    <p class="challenge__num" aria-hidden="true">1</p>
+                    <h3>Inflation in Pakistan</h3>
+                    <p class="challenge__skills">Skills: building a website, embedding a live chart</p>
+                    <div class="challenge__body">
+                        <p class="todo">Say what the chart shows and why it matters for policy in two or three sentences. Which years stand out, and what was happening then?</p>
+                    </div>
+                </div>
+                <figure class="challenge__chart">
+                    <div class="plate" data-spec="pak_inflation.json"></div>
+                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                </figure>
+            </article>
 
-    <section>
-        <div class="chart-description">
-            <h2>Section 4: A basic chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
-            </p>
-        </div>
+            <article class="challenge" id="c2">
+                <div class="challenge__text">
+                    <p class="challenge__num" aria-hidden="true">2</p>
+                    <h3>Unemployment in Pakistan</h3>
+                    <p class="challenge__skills">Skills: hosting data in the cloud</p>
+                    <div class="challenge__body">
+                        <p class="todo">How does unemployment move alongside inflation in the chart above? Point the reader to the one pattern you want them to notice.</p>
+                    </div>
+                </div>
+                <figure class="challenge__chart">
+                    <div class="plate" data-spec="pak_unemp.json"></div>
+                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                </figure>
+            </article>
 
-        <!-- This element will contain our vega-lite chart -->
-        <figure id="Location4"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+            <article class="challenge" id="c3">
+                <div class="challenge__text">
+                    <p class="challenge__num" aria-hidden="true">3</p>
+                    <h3>Week 1 practice chart</h3>
+                    <p class="challenge__skills">Skills: editing and cleaning data</p>
+                    <div class="challenge__body">
+                        <p class="todo">Describe what you changed in the data before charting it, and why those choices affect what the reader sees.</p>
+                    </div>
+                </div>
+                <figure class="challenge__chart">
+                    <div class="plate" data-spec="wk1_chart1.json"></div>
+                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                </figure>
+            </article>
 
-    </section>
+            <article class="challenge" id="c4">
+                <div class="challenge__text">
+                    <p class="challenge__num" aria-hidden="true">4</p>
+                    <h3>Week 1 practice chart, part two</h3>
+                    <p class="challenge__skills">Skills: API-driven charts</p>
+                    <div class="challenge__body">
+                        <p class="todo">Explain where the data comes from and how the chart stays up to date when the source changes.</p>
+                    </div>
+                </div>
+                <figure class="challenge__chart">
+                    <div class="plate" data-spec="wk1_chart2.json"></div>
+                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                </figure>
+            </article>
 
-    <section>
-        <div class="chart-description">
-            <h2>Section 5: A basic chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
-            </p>
-        </div>
+            <article class="challenge" id="c5">
+                <div class="challenge__text">
+                    <p class="challenge__num" aria-hidden="true">5</p>
+                    <h3>Test chart</h3>
+                    <p class="challenge__skills">Skills: loops and APIs</p>
+                    <div class="challenge__body">
+                        <p class="todo">Give this chart a real title, then describe what the loop does and what the chart lets a policymaker compare.</p>
+                    </div>
+                </div>
+                <figure class="challenge__chart">
+                    <div class="plate" data-spec="test.json"></div>
+                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                </figure>
+            </article>
 
-        <!-- This element will contain our vega-lite chart -->
-        <figure id="Location5"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
+            <article class="challenge" id="c6">
+                <div class="challenge__text">
+                    <p class="challenge__num" aria-hidden="true">6</p>
+                    <h3>Chocolate prices in the UK</h3>
+                    <p class="challenge__skills">Skills: scrapers</p>
+                    <div class="challenge__body">
+                        <p class="todo">What did you scrape, from where, and what does the price trend say about the cost of living?</p>
+                    </div>
+                </div>
+                <figure class="challenge__chart">
+                    <div class="plate" data-spec="uk_choc_prices.json"></div>
+                    <figcaption>Source: add the dataset name and a link here.</figcaption>
+                </figure>
+            </article>
 
-    </section>
+        </section>
+    </main>
 
-    <section>
-        <div class="chart-description">
-            <h2>Section 6: A basic chart</h2>
-            <p> <!-- This is a paragraph, it's the main way to display text on a web page -->
-                We've organised the page into sections, with each section containing a chart, title and a description. Here, we can describe the chart and give some context.
-                As a first example, we're using a basic chart from our repo.
-            </p>
-        </div>
+    <!-- FOOTER: big contact, echoing the hero -->
+    <footer class="footer">
+        <h2 class="footer__lead">Get in touch</h2>
+        <ul class="footer__links">
+            <li><a href="https://www.linkedin.com/in/alina-ali1/">LinkedIn</a></li>
+            <li><a href="https://github.com/alina-ali27">GitHub</a></li>
+        </ul>
+        <p class="footer__small">Charts made with Vega-Lite. Site hosted on GitHub Pages.</p>
+    </footer>
 
-        <!-- This element will contain our vega-lite chart -->
-        <figure id="Location6"></figure> <!-- we give it an id so we can put a vega-lite graph here with VegaEmbed -->
-
-    </section>
-    <!-- Do you want to add more sections? -->
-        <!-- Try copying pasting the section above -->
-        <!-- You'll need to change the id of the figure "<figure id="Location2"... -->
-        <!-- ... and add a new variable for the graph spec in the script at the bottom of the page -->
-
-
-    <!-- This is a script, it's a way to run JavaScript code on the page -->
     <script>
-        // This is a comment in JavaScript - it's a different language to HTML and CSS
+        // A shared look for every chart, so they match the page's fonts and colours.
+        // Anything set inside an individual .json spec still wins over this.
+        const chartTheme = {
+            font: "Archivo, Helvetica Neue, Arial, sans-serif",
+            background: "transparent",
+            view: { stroke: null },
+            title: { fontSize: 15, fontWeight: 600, anchor: "start", color: "#1A1F2B", offset: 14 },
+            axis: {
+                labelColor: "#5C6372",
+                titleColor: "#1A1F2B",
+                titleFontWeight: 500,
+                gridColor: "#E6E8EC",
+                domainColor: "#9AA1AE",
+                tickColor: "#9AA1AE",
+                labelFontSize: 11,
+                titleFontSize: 12
+            },
+            legend: { labelColor: "#5C6372", titleColor: "#1A1F2B", titleFontWeight: 500 },
+            mark: { color: "#2B3CE0" },
+            range: { category: ["#2B3CE0", "#E2711D", "#2A9D8F", "#B83280", "#7A8190", "#E9C46A"] }
+        };
 
-        let figure_1_spec = "pak_inflation.json"; // We're storing the URL of the graph we want to display in a variable
-        // You should have a spec for a graph in this same folder. Just specify its name here, e.g. let figure_1_spec = "chart1.json"
+        // The loop: find every element with a data-spec attribute and embed its chart there.
+        document.querySelectorAll("[data-spec]").forEach(function (el) {
+            const spec = el.dataset.spec;
 
-        vegaEmbed('#Location1', figure_1_spec) // We're using the vegaEmbed function to put a graph in the element with id figure_1
-        
-        // Do you want to add more graphs?
-        // try defining a new variable for figure_2_spec, adding VegaEmbed for Location2, and adding a new section in the HTML
-    
-        let figure_2_spec = "pak_unemp.json";
-
-        vegaEmbed('#Location2', figure_2_spec)
-
-        let figure_3_spec = "wk1_chart1.json";
-
-        vegaEmbed('#Location3', figure_3_spec)
-
-        let figure_4_spec = "wk1_chart2.json";
-
-        vegaEmbed('#Location4', figure_4_spec)
-
-            let figure_5_spec = "test.json";
-
-        vegaEmbed('#Location5', figure_5_spec)
-
-        let figure_6_spec = "uk_choc_prices.json";
-
-        vegaEmbed('#Location6', figure_6_spec)
-
+            // actions: false hides the "..." menu. Set it to true to show View Source / Open in Editor.
+            vegaEmbed(el, spec, { actions: false, config: chartTheme })
+                .catch(function (error) {
+                    console.error(spec, error);
+                    el.innerHTML = '<p class="plate__error">This chart didn’t load. Check that '
+                        + spec + ' is in the same folder as index.html, then refresh the page.</p>';
+                });
+        });
     </script>
 
 </body>
-    
+
 </html>
