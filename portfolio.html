@@ -1,7 +1,5 @@
 <!--
   PP434 portfolio (Automated Data Visualisation)
-  Charts are embedded exactly like the course template: each <figure> has an id,
-  and the script at the bottom calls vegaEmbed('#LocationX', spec) for it.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +18,7 @@
     <!-- One stylesheet shared by every page -->
     <link rel="stylesheet" type="text/css" href="index.css">
 
-    <!-- This is a link to the vega-lite packages which we're using to make graphs -->
+    <!-- This is a link to the vega-lite packages which I am using to make graphs -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6.4.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.3.0"></script>
@@ -28,7 +26,7 @@
 
 <body>
 
-    <!-- Top bar: the same on every page. aria-current marks the page you're on. -->
+    <!-- Top bar. aria-current marks the page you're on. -->
     <header class="topbar">
         <a class="topbar__home" href="index.html">Alina Ali</a>
         <nav class="topbar__nav" aria-label="Main">
@@ -52,7 +50,7 @@
             </nav>
         </section>
 
-        <!-- ================= CHALLENGE 1 ================= -->
+        <!-- CHALLENGE 1 -->
         <section class="challenge" id="challenge1" aria-labelledby="challenge1-title">
             <header class="challenge__head">
                 <p class="challenge__num" aria-hidden="true">1</p>
@@ -65,18 +63,18 @@
             <article class="entry">
                 <div class="entry__text">
                     <h3>Section 1: Adding a chart using vega-embed</h3>
-                    <p class="todo">This chart shows the sources of CO2 emissions for different food items</p>
+                    <p class="chart-description">This chart shows the sources of CO2 emissions for different food items</p>
                     <p class="entry__source">Source: <span class="todo">Richard Davies Github</span></p>
                     <p class="entry__links"><a href="wk1_chart1.json">Chart JSON</a></p>
                 </div>
-                <!-- This element will contain our vega-lite chart -->
+                <!-- This element will contain my vega-lite chart -->
                 <figure class="entry__chart" id="Location1"></figure>
             </article>
 
             <article class="entry">
                 <div class="entry__text">
                     <h3>Section 2: Adding a second chart using vega-embed</h3>
-                    <p class="todo">This chart shows real GDP growth across varies differnt countries</p>
+                    <p class="chart-description">This chart shows real GDP growth across varies differnt countries</p>
                     <p class="entry__source">Source: <span class="todo">Richard Davies Github</span></p>
                     <p class="entry__links"><a href="wk1_chart2.json">Chart JSON</a></p>
                 </div>
@@ -86,7 +84,7 @@
             <article class="entry">
                 <div class="entry__text">
                     <h3>Section 3: Inflation in Pakistan</h3>
-                    <p class="todo">Which years stand out, and what was happening in Pakistan’s economy then?</p>
+                    <p class="chart-description">Which years stand out, and what was happening in Pakistan’s economy then?</p>
                     <p class="entry__source">Source: <span class="todo">add the source here</span></p>
                     <p class="entry__links"><a href="pak_inflation.json">Chart JSON</a></p>
                 </div>
@@ -96,7 +94,7 @@
             <article class="entry">
                 <div class="entry__text">
                     <h3>Section 4: Unemployment in Pakistan</h3>
-                    <p class="todo">How does unemployment move alongside the inflation chart above?</p>
+                    <p class="chart-description">How does unemployment move alongside the inflation chart above?</p>
                     <p class="entry__source">Source: <span class="todo">add the source here</span></p>
                     <p class="entry__links"><a href="pak_unemp.json">Chart JSON</a></p>
                 </div>
@@ -104,7 +102,7 @@
             </article>
         </section>
 
-        <!-- ================= CHALLENGE 2 ================= -->
+        <!-- CHALLENGE 2 -->
         <section class="challenge" id="challenge2" aria-labelledby="challenge2-title">
             <header class="challenge__head">
                 <p class="challenge__num" aria-hidden="true">2</p>
@@ -117,7 +115,7 @@
             <article class="entry">
                 <div class="entry__text">
                     <h3>Task 1: Adapting a Vega-Lite example</h3>
-                    <p class="todo">Which example did you start from, and what did you change?</p>
+                    <p class="chart-description">Which example did you start from, and what did you change?</p>
                     <p class="entry__source">Source: <span class="todo">add the source here</span></p>
                     <p class="entry__links"><a href="test.json">Chart JSON</a></p>
                 </div>
@@ -127,7 +125,7 @@
             <article class="entry">
                 <div class="entry__text">
                     <h3>Task 2: Chocolate prices in the UK</h3>
-                    <p class="todo">Which time series did you use, and what edits did you make to the chart’s features?</p>
+                    <p class="chart-description">Which time series did you use, and what edits did you make to the chart’s features?</p>
                     <p class="entry__source">Source: <span class="todo">add the source here</span></p>
                     <p class="entry__links"><a href="uk_choc_prices.json">Chart JSON</a></p>
                 </div>
@@ -151,7 +149,7 @@
     </footer>
 
     <script>
-        // ---------- Charts: same pattern as the course template ----------
+        // ---------- Charts ----------
 
         // Challenge 1
         let figure_1_spec = "wk1_chart1.json";
