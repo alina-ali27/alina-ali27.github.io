@@ -55,7 +55,7 @@
             <header class="challenge__head">
                 <p class="challenge__num" aria-hidden="true">1</p>
                 <div>
-                    <h2 id="challenge1-title">Challenge 1</h2>
+                    <h2 id="challenge1-title">Challenge 1 - Hosting</h2>
                     <p class="challenge__about">Displaying charts in your own site</p>
                 </div>
             </header>
@@ -63,8 +63,10 @@
             <article class="entry">
                 <div class="entry__text">
                     <h3>Section 1: Adding a chart using vega-embed</h3>
-                    <p class="chart-description">This chart shows the sources of CO2 emissions for different food items</p>
-                    <p class="entry__source">Source: <span class="todo">Richard Davies Github</span></p>
+                    <p class="chart-description">What we eat matters far more than how it reaches us. A kilogram of beef from a beef herd produces around 60 kg of CO₂, 
+                      more than twice as much as lamb or cheese and over fifty times as much as peas. For almost every food, most emissions come from land use and farming, 
+                      while transport and packaging are thin slivers at the end of each bar.</p>
+                    <p class="entry__source">Source: <span class="todo">Our World in Data, via Richard Davies chart library</span></p>
                     <p class="entry__links"><a href="wk1_chart1.json">Chart JSON</a></p>
                 </div>
                 <!-- This element will contain my vega-lite chart -->
@@ -74,31 +76,13 @@
             <article class="entry">
                 <div class="entry__text">
                     <h3>Section 2: Adding a second chart using vega-embed</h3>
-                    <p class="chart-description">This chart shows real GDP growth across varies differnt countries</p>
-                    <p class="entry__source">Source: <span class="todo">Richard Davies Github</span></p>
+                    <p class="chart-description">Between 1990 and 2022, GDP per person in the United States roughly tripled, to about $76,000. 
+                      China’s climb is the most striking, from almost nothing to over $20,000. Meanwhile Nigeria and the DR Congo barely moved, 
+                      so the gap between the richest and poorest countries here has widened in dollar terms. The dip in 2020 is the pandemic.</p>
+                    <p class="entry__source">Source: <span class="todo">World Bank, via Richard Davies chart library</span></p>
                     <p class="entry__links"><a href="wk1_chart2.json">Chart JSON</a></p>
                 </div>
                 <figure class="entry__chart" id="Location2"></figure>
-            </article>
-
-            <article class="entry">
-                <div class="entry__text">
-                    <h3>Section 3: Inflation in Pakistan</h3>
-                    <p class="chart-description">Which years stand out, and what was happening in Pakistan’s economy then?</p>
-                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
-                    <p class="entry__links"><a href="pak_inflation.json">Chart JSON</a></p>
-                </div>
-                <figure class="entry__chart" id="Location3"></figure>
-            </article>
-
-            <article class="entry">
-                <div class="entry__text">
-                    <h3>Section 4: Unemployment in Pakistan</h3>
-                    <p class="chart-description">How does unemployment move alongside the inflation chart above?</p>
-                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
-                    <p class="entry__links"><a href="pak_unemp.json">Chart JSON</a></p>
-                </div>
-                <figure class="entry__chart" id="Location4"></figure>
             </article>
         </section>
 
@@ -107,27 +91,34 @@
             <header class="challenge__head">
                 <p class="challenge__num" aria-hidden="true">2</p>
                 <div>
-                    <h2 id="challenge2-title">Challenge 2</h2>
-                    <p class="challenge__about">Building - Creating your own Visualizations</p>
+                    <h2 id="challenge2-title">Challenge 2 - Building</h2>
+                    <p class="challenge__about">Creating your own Visualizations</p>
                 </div>
             </header>
 
             <article class="entry">
                 <div class="entry__text">
-                    <h3>Task 1: Adapting a Vega-Lite example</h3>
-                    <p class="chart-description">Which example did you start from, and what did you change?</p>
-                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
-                    <p class="entry__links"><a href="test.json">Chart JSON</a></p>
+                    <h3>Section 1: Inflation in Pakistan</h3>
+                    <p class="chart-description">Pakistan has lived through three major inflation shocks. 
+                      Prices rose by around 27% in 1974, after the global oil crisis and a sharp rupee devaluation. 
+                      They jumped to 20% in 2008, when world food and fuel prices spiked. 
+                      Then came a record of over 30% in 2023, as the rupee collapsed and energy prices rose. 
+                      Inflation then fell back just as quickly, to around 4% by 2025.</p>
+                    <p class="entry__source">Source: <span class="todo">Economics Observatory Data Hub</span></p>
+                    <p class="entry__links"><a href="pak_inflation.json">Chart JSON</a></p>
                 </div>
                 <figure class="entry__chart" id="Location5"></figure>
             </article>
 
             <article class="entry">
                 <div class="entry__text">
-                    <h3>Task 2: Chocolate prices in the UK</h3>
-                    <p class="chart-description">Which time series did you use, and what edits did you make to the chart’s features?</p>
-                    <p class="entry__source">Source: <span class="todo">add the source here</span></p>
-                    <p class="entry__links"><a href="uk_choc_prices.json">Chart JSON</a></p>
+                    <h3>Section 4: Unemployment in Pakistan</h3>
+                    <p class="chart-description">Official unemployment rose from under 1% before 2011 to a peak of over 6% in 2021, 
+                      and has stayed above 5% since. The flat line before 2011 should be read with caution. 
+                      It almost certainly reflects how the data was recorded rather than a real labour market. 
+                      In a country where most people work informally, the headline rate also understates how many people lack decent work.</p>
+                    <p class="entry__source">Source: <span class="todo">Economics Observatory Data Hub</span></p>
+                    <p class="entry__links"><a href="pak_unemp.json">Chart JSON</a></p>
                 </div>
                 <figure class="entry__chart" id="Location6"></figure>
             </article>
