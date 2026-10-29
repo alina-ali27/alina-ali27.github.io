@@ -1,0 +1,128 @@
+agency,city,trips_y2019,trips_change,service_change
+King County,"Seattle--Tacoma, WA",124300720.0,-26.328853927797034,-8.962520747764646
+Spokane Transit Authority,"Spokane, WA",9971798.0,4.632103458172732,21.00358811909928
+Pierce County Transportation Benefit Area Authority,"Seattle--Tacoma, WA",8376891.0,-15.907393327667751,-6.044541853907848
+Lane Transit District,"Eugene, OR",9964550.0,-38.652161913985076,-14.923746824341555
+Tri-County Metropolitan Transportation District of Oregon,"Portland, OR--WA",96124032.0,-32.03955489507556,-5.212309438749784
+Clark County Public Transportation Benefit Area Authority,"Portland, OR--WA",5989797.0,-17.739232231075608,5.526272440683089
+Snohomish County Public Transportation Benefit Area Corporation,"Seattle--Tacoma, WA",10078860.0,-14.509488176242158,3.1726683043086457
+Washington State Ferries,"Seattle--Tacoma, WA",23884515.0,-15.807618450699124,-10.128676047445385
+Central Puget Sound Regional Transit Authority,"Seattle--Tacoma, WA",47805583.0,6.545112105420836,23.764321903206298
+City of Portland,"Portland, OR--WA",6299791.0,-35.392920177828124,-7.834432058071927
+Rhode Island Public Transit Authority,"Providence, RI--MA",16003037.0,-24.457713870186016,-1.464373375017447
+Massachusetts Bay Transportation Authority,"Boston, MA--NH",364525526.0,-25.73934973212274,4.400478277799191
+Pioneer Valley Transit Authority,"Springfield, MA--CT",9943799.0,-0.2795008225729423,11.48757179745199
+Connecticut Department of Transportation - CTTRANSIT - Hartford Division,"Hartford, CT",15868859.0,-24.969344046726995,-1.0435079392248636
+Greater Bridgeport Transit Authority,"Bridgeport--Stamford, CT--NY",5178794.0,-23.430474353681575,2.5353721522609174
+Connecticut Department of Transportation - CTTRANSIT New Haven Division,"New Haven, CT",7465928.0,-18.87893909504619,24.025439079182643
+Capital District Transportation Authority,"Albany--Schenectady, NY",15154738.0,17.06879393098053,18.9956583645686
+Niagara Frontier Transportation Authority,"Buffalo, NY",24358711.0,-33.94317540037319,-14.64807889128058
+MTA New York City Transit,"New York--Jersey City--Newark, NY--NJ",3457749618.0,-12.901096906433086,0.17998160071610592
+Central New York Regional Transportation Authority,"Syracuse, NY",9787588.0,-22.877648711817457,-11.297199920565127
+Port Authority Transit Corporation,"Philadelphia, PA--NJ--DE--MD",11107474.0,-47.189883136345856,-4.300209946928623
+Westchester County,"New York--Jersey City--Newark, NY--NJ",26474087.0,-5.186460254512271,-1.6876168160137262
+"Metro-North Commuter Railroad Company, dba: MTA Metro-North Railroad","New York--Jersey City--Newark, NY--NJ",92012752.0,-14.701998044792752,-4.0148211568608705
+New Jersey Transit Corporation,"New York--Jersey City--Newark, NY--NJ",265098178.0,-16.12384073043308,-0.038161996102603624
+New York City Department of Transportation,"New York--Jersey City--Newark, NY--NJ",23290742.0,-28.32614349512781,-70.61668188016273
+Port Authority Trans-Hudson Corporation,"New York--Jersey City--Newark, NY--NJ",91672195.0,-29.88118371115691,-4.196760858778347
+Staten Island Rapid Transit Operating Authority,"New York--Jersey City--Newark, NY--NJ",7731849.0,-29.684710604151732,16.310878516247705
+MTA Long Island Rail Road,"New York--Jersey City--Newark, NY--NJ",114241364.0,-10.540594560828243,17.249124808930837
+Regional Transit Service,"Rochester, NY",14401835.0,-24.371672082064542,-13.904588445156495
+MTA Bus Company,"New York--Jersey City--Newark, NY--NJ",135080070.0,-0.583435439439739,4.068309805193837
+Port Imperial Ferry Corporation,"New York--Jersey City--Newark, NY--NJ",8032326.0,-20.58215764648994,-16.313075886427463
+County of Nassau,"New York--Jersey City--Newark, NY--NJ",23791024.0,-14.70513837487617,-5.434585441922435
+New York City Economic Development Corporation,"New York--Jersey City--Newark, NY--NJ",6557602.0,13.458486806610104,5.202828290182904
+Greater Richmond Transit Company,"Richmond, VA",9082767.0,29.374947083856707,17.29602566919597
+Southeastern Pennsylvania Transportation Authority,"Philadelphia, PA--NJ--DE--MD",308746290.0,-27.837047045974217,-14.428236446374775
+Pittsburgh Regional Transit,"Pittsburgh, PA",62769501.0,-41.11766158536133,-11.529432540382622
+Washington Metropolitan Area Transit Authority,"Washington--Arlington, DC--VA--MD",362524916.0,-15.143824486811274,7.749699783173325
+Maryland Transit Administration,"Baltimore, MD",91032931.0,-26.685144302340436,-7.400144632920824
+"Montgomery County, Maryland","Washington--Arlington, DC--VA--MD",20717628.0,-6.316944198438157,-2.6485213740998104
+Centre Area Transportation Authority,"State College, PA",6453552.0,-27.61775220839624,-33.39315695624562
+"Fairfax County, VA","Washington--Arlington, DC--VA--MD",8298785.0,17.749140386213156,18.376241947681326
+Delaware Transit Corporation,"Philadelphia, PA--NJ--DE--MD",7243016.0,-1.062954990020737,-9.14181381768806
+Transportation District Commission of Hampton Roads,"Virginia Beach--Norfolk, VA",12298068.0,-25.295339072771426,-16.80328136715764
+City of Memphis,"Memphis, TN--MS--AR",6029317.0,-62.067295516225144,-36.578793789764205
+Metropolitan Transit Authority,"Nashville-Davidson, TN",9118379.0,-1.203349849792379,17.870578970485518
+City of Raleigh,"Raleigh, NC",5475685.0,39.263818134169526,42.640128964899795
+City of Charlotte North Carolina,"Charlotte, NC--SC",24227437.0,-35.70530386685146,-22.059307446511212
+Transit Authority of River City,"Louisville/Jefferson County, KY--IN",10174282.0,-39.62162637127613,-28.982900624621386
+Metropolitan Atlanta Rapid Transit Authority,"Atlanta, GA",113964020.0,-42.69702314818309,-7.012359038816651
+Pinellas Suncoast Transit Authority,"Tampa--St. Petersburg, FL",13261100.0,-26.9964708809978,1.235245521737216
+Broward County Board of County Commissioners,"Miami--Fort Lauderdale, FL",26182836.0,-11.108769882681923,-4.789350306634111
+"City of Gainesville, FL","Gainesville, FL",9111767.0,-48.03673096557451,-38.06034905275104
+County of Miami-Dade ,"Miami--Fort Lauderdale, FL",99874479.0,-20.643142478870903,-7.601256375892296
+Central Florida Regional Transportation Authority,"Orlando, FL",23611727.0,-10.867205943893898,5.501834768232539
+"Board of County Commissioners, Palm Beach County","Miami--Fort Lauderdale, FL",8988736.0,-5.410471505671099,6.590858259631371
+Jacksonville Transportation Authority,"Jacksonville, FL",11044713.0,-36.86146484747951,-4.18546729987016
+Hillsborough Area Regional Transit Authority,"Tampa--St. Petersburg, FL",12934800.0,-9.991944212511983,-19.15625484445106
+Town of Chapel Hill,"Durham, NC",6351179.0,-33.319246709941574,-5.1726408287102394
+South Florida Regional Transportation Authority,"Miami--Fort Lauderdale, FL",5454612.0,-8.852893661364003,-4.690989360110986
+City of Durham,"Durham, NC",6606005.0,0.620768528028659,18.340585176083522
+Alternativa de Transporte Integrado ,"San Juan, PR",6715134.0,10.217741001147562,5.4415972309981075
+University of Georgia,"Athens-Clarke County, GA",5749578.0,-48.80874735502327,-27.334807783106786
+City of Madison,"Madison, WI",12856514.0,-3.642830397104535,6.990480125596421
+Milwaukee County,"Milwaukee, WI",28972674.0,-13.608937166103486,-1.4971673844149214
+METRO Regional Transit Authority ,"Akron, OH",5141660.0,4.926774621425767,7.588559996149158
+Southwest Ohio Regional Transit Authority,"Cincinnati, OH--KY",13776508.0,-4.359196103976426,24.873626271299763
+The Greater Cleveland Regional Transit Authority,"Cleveland, OH",31567791.0,-24.645702957169224,9.14513823765708
+Central Ohio Transit Authority,"Columbus, OH",19141454.0,-35.17866511081134,-15.250313041786168
+Greater Dayton Regional Transit Authority,"Dayton, OH",9193660.0,-39.60020274841576,-4.127773387655543
+Metro Transit ,"Minneapolis--St. Paul, MN",77927237.0,-34.53814999240894,-19.721951886240994
+Suburban Mobility Authority for Regional Transportation,"Detroit, MI",9022505.0,-21.11425817996222,-10.656846266434638
+Interurban Transit Partnership,"Grand Rapids, MI",9990391.0,-36.967361938086306,-2.7766435559805513
+Capital Area Transportation Authority,"Lansing, MI",10684802.0,-13.501953522395638,-0.8304053232777497
+Ann Arbor Area Transportation Authority,"Ann Arbor, MI",6430375.0,-18.40835099041658,1.326358604695499
+Indianapolis and Marion County Public Transportation,"Indianapolis, IN",9235684.0,-27.925663112769993,9.6927583499272
+Greater Lafayette Public Transportation Corporation,"Lafayette, IN",5068309.0,-36.524765952509995,-16.684876951806494
+Champaign-Urbana Mass Transit District,"Champaign, IL",11240621.0,2.7899348265545187,0.520071714151582
+Chicago Transit Authority,"Chicago, IL--IN",455743541.0,-25.826335079096594,7.906856393755302
+"Pace, the Suburban Bus Division of the Regional Transportation Authority","Chicago, IL--IN",26191884.0,-37.07283905197502,-0.16498358693805004
+Northeast Illinois Regional Commuter Railroad Corporation,"Chicago, IL--IN",61456663.0,-38.08889037792371,-1.4656863246221508
+City of Detroit ,"Detroit, MI",22700903.0,-39.943609291665624,-16.11044097339881
+University of Michigan Parking and Transportation Services,"Ann Arbor, MI",7379618.0,-42.93056903487417,-5.39656603654628
+City of El Paso,"El Paso, TX--NM",10146490.0,-42.27814741846688,-23.08228059935703
+Fort Worth Transportation Authority,"Dallas--Fort Worth--Arlington, TX",5669960.0,-2.14035019647405,11.451272900688902
+"Metropolitan Transit Authority of Harris County, Texas ","Houston, TX",86312795.0,-12.473639626662536,2.266435337466799
+VIA Metropolitan Transit,"San Antonio, TX",42365472.0,-30.465948780176465,-21.885446690183198
+City of Albuquerque,"Albuquerque, NM",9010941.0,-16.388188536580138,-36.91751110597083
+New Orleans Regional Transit Authority,"New Orleans, LA",16087414.0,-5.465421602253784,-7.822518456661564
+Capital Metropolitan Transportation Authority,"Austin, TX",30262318.0,-19.413258429179148,-7.69885201745314
+Dallas Area Rapid Transit,"Dallas--Fort Worth--Arlington, TX",67796079.0,-24.244083496333168,-10.272546230797087
+Kansas City Area Transportation Authority,"Kansas City, MO--KS",11977489.0,-5.710228579629673,-20.918333448303507
+Bi-State Development Agency of the Missouri-Illinois Metropolitan District,"St. Louis, MO--IL",35580774.0,-39.712716761023806,-27.102714592894863
+Ames Transit Agency,"Ames, IA",5825673.0,-13.706519401277761,8.483624407270419
+Utah Transit Authority,"Salt Lake City, UT",43121532.0,-11.619763416568784,-4.401426577558121
+Denver Regional Transportation District,"Denver--Aurora, CO",104028461.0,-39.220251465606125,-26.36659194877683
+Regional Transportation Commission of Washoe County,"Reno, NV--CA",7640695.0,-22.367520232125482,4.530699020257645
+City and County of Honolulu,"Honolulu, HI",60852272.0,-29.17405286034349,12.971712077565911
+San Francisco Bay Area Rapid Transit District,"San Francisco--Oakland, CA",127592425.0,-51.53324423452255,-11.981515538330644
+Golden Empire Transit District,"Bakersfield, CA",6247978.0,-23.501555223145786,-23.380621159984337
+Santa Cruz Metropolitan Transit District,"Santa Cruz, CA",5079834.0,2.727864729438001,20.02734163006361
+City of Santa Monica,"Los Angeles--Long Beach--Anaheim, CA",12640842.0,-21.589440007240025,-13.883194604022187
+San Mateo County Transit District,"San Francisco--Oakland, CA",11117112.0,-2.193654251212007,-3.14269922508843
+Santa Clara Valley Transportation Authority,"San Jose, CA",35718246.0,-23.929274130650203,-7.453219671233279
+Alameda-Contra Costa Transit District,"San Francisco--Oakland, CA",54101905.0,-25.949284040922404,-14.191790527741077
+City and County of San Francisco,"San Francisco--Oakland, CA",218855658.0,-22.02937746302177,-7.4951257936380795
+"Golden Gate Bridge, Highway and Transportation District","San Francisco--Oakland, CA",5527844.0,-40.62269123368893,-45.37223997991341
+Sacramento Regional Transit District,"Sacramento, CA",20831475.0,-17.0400319708518,5.306603106638996
+Santa Barbara Metropolitan Transit District,"Santa Barbara, CA",6503350.0,-28.09894900320604,-18.930690178165076
+Long Beach Transit,"Los Angeles--Long Beach--Anaheim, CA",23132652.0,-15.075794163159506,-5.795903221226895
+San Diego Metropolitan Transit System,"San Diego, CA",86034112.0,-6.802661018922351,9.487743704941941
+City of Fresno,"Fresno, CA",10648817.0,-3.235936912053239,16.619132309258823
+Omnitrans,"Riverside--San Bernardino, CA",10541433.0,-28.515240764704387,-11.737428640431546
+North County Transit District,"San Diego, CA",10174617.0,-17.389666854290443,-0.3924585519900936
+Riverside Transit Agency,"Riverside--San Bernardino, CA",8222689.0,-28.044961933985345,-28.955577615076468
+City of Phoenix,"Phoenix--Mesa--Scottsdale, AZ",37694025.0,-35.69952532264728,-5.916765338646568
+City of Tucson,"Tucson, AZ",14669518.0,21.176830758856568,-11.589861379716782
+Orange County Transportation Authority,"Los Angeles--Long Beach--Anaheim, CA",37139739.0,-5.98727686266185,-6.819939915785611
+City of Montebello,"Los Angeles--Long Beach--Anaheim, CA",5012194.0,-40.956156126438835,-28.785017961314473
+Regional Transportation Commission of Southern Nevada,"Las Vegas--Henderson--Paradise, NV",65528910.0,-14.232164093680177,1.0600376596810346
+Peninsula Corridor Joint Powers Board,"San Francisco--Oakland, CA",18144687.0,-28.817796636558125,44.208809302348186
+Regional Public Transportation Authority,"Phoenix--Mesa--Scottsdale, AZ",13551104.0,-29.475325405221596,-10.153852191031076
+Foothill Transit,"Los Angeles--Long Beach--Anaheim, CA",11751793.0,-13.939294199617025,-4.469465499016256
+City of Los Angeles,"Los Angeles--Long Beach--Anaheim, CA",18277971.0,-26.53420338614171,36.64027671310313
+Southern California Regional Rail Authority,"Los Angeles--Long Beach--Anaheim, CA",12640293.0,-53.955924914082296,7.376866156498241
+Los Angeles County Metropolitan Transportation Authority ,"Los Angeles--Long Beach--Anaheim, CA",370481099.0,-17.288262524831254,0.3864323797604152
+"Valley Metro Rail, Inc.","Phoenix--Mesa--Scottsdale, AZ",15060207.0,-23.789181649362455,9.485903026814624
+Anaheim Transportation Network,"Los Angeles--Long Beach--Anaheim, CA",9086457.0,-6.848742034436528,-32.30461783213499
