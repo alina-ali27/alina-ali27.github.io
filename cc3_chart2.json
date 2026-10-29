@@ -1,0 +1,95 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Change in service vs change in ridership, US transit agencies, 2019 to 2025",
+
+  "title": {
+    "text": "Agencies that ran more service won back more riders",
+    "subtitle": [
+      "Change from 2019 to 2025. Each dot is a US transit agency, sized by 2019 ridership.",
+      "Orange line: trend, about 5% more riders for every 10% more service."
+    ]
+  },
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/alina-ali27/alina-ali27.github.io/refs/heads/main/chart2_agencies.csv",
+    "format": {"parse": {"trips_y2019": "number", "trips_change": "number", "service_change": "number"}}
+  },
+
+  "width": "container",
+  "height": 420,
+  "autosize": {"type": "fit", "contains": "padding"},
+
+  "transform": [
+    {"calculate": "({'San Francisco Bay Area Rapid Transit District': 'BART', 'Southern California Regional Rail Authority': 'Metrolink (LA)', 'City of Memphis': 'Memphis', 'City of Raleigh': 'Raleigh', 'City of Tucson': 'Tucson', 'Greater Richmond Transit Company': 'Richmond'})[datum.agency] || ''", "as": "label"}
+  ],
+
+  "encoding": {
+    "x": {"field": "service_change", "type": "quantitative", "title": "Change in service since 2019 (%)",
+          "scale": {"padding": 28},
+          "axis": {"labelExpr": "datum.value > 0 ? '+' + datum.label : datum.label", "tickCount": 8}},
+    "y": {"field": "trips_change", "type": "quantitative", "title": "Change in riders since 2019 (%)",
+          "scale": {"padding": 28},
+          "axis": {"labelExpr": "datum.value > 0 ? '+' + datum.label : datum.label", "tickCount": 8}}
+  },
+
+  "layer": [
+    {
+      "description": "Zero line, vertical",
+      "mark": {"type": "rule", "color": "#C3C8D1"},
+      "encoding": {"x": {"datum": 0}, "y": null}
+    },
+    {
+      "description": "Zero line, horizontal",
+      "mark": {"type": "rule", "color": "#C3C8D1"},
+      "encoding": {"y": {"datum": 0}, "x": null}
+    },
+    {
+      "description": "One dot per agency",
+      "mark": {"type": "circle", "color": "#2B3CE0", "opacity": 0.6, "stroke": "#FFFFFF", "strokeWidth": 1},
+      "encoding": {
+        "size": {"field": "trips_y2019", "type": "quantitative", "scale": {"range": [25, 900]}, "legend": null},
+        "tooltip": [
+          {"field": "agency", "title": "Agency"},
+          {"field": "city", "title": "Urban area"},
+          {"field": "service_change", "title": "Service change (%)", "format": "+.0f"},
+          {"field": "trips_change", "title": "Ridership change (%)", "format": "+.0f"}
+        ]
+      }
+    },
+    {
+      "description": "Trend line",
+      "transform": [{"regression": "trips_change", "on": "service_change"}],
+      "mark": {"type": "line", "color": "#E2711D", "strokeWidth": 2.5}
+    },
+    {
+      "description": "Labels for the agencies named in the commentary",
+      "transform": [{"filter": "datum.label != ''"}],
+      "mark": {"type": "text", "align": "left", "dx": 9, "fontSize": 11, "fontWeight": 600, "color": "#1A1F2B"},
+      "encoding": {"text": {"field": "label"}}
+    },
+    {
+      "description": "Quadrant label, top right",
+      "transform": [{"window": [{"op": "row_number", "as": "row"}]}, {"filter": "datum.row == 1"}],
+      "mark": {"type": "text", "align": "right", "baseline": "top", "fontSize": 11, "color": "#9AA1AE",
+               "x": {"expr": "width - 4"}, "y": 4},
+      "encoding": {"x": null, "y": null, "text": {"value": "More service, more riders"}}
+    },
+    {
+      "description": "Quadrant label, bottom left",
+      "transform": [{"window": [{"op": "row_number", "as": "row"}]}, {"filter": "datum.row == 1"}],
+      "mark": {"type": "text", "align": "left", "baseline": "bottom", "fontSize": 11, "color": "#9AA1AE",
+               "x": 4, "y": {"expr": "height - 4"}},
+      "encoding": {"x": null, "y": null, "text": {"value": "Less service, fewer riders"}}
+    }
+  ],
+
+  "config": {
+    "font": "Archivo, Helvetica Neue, Arial, sans-serif",
+    "view": {"stroke": null},
+    "title": {"fontSize": 19, "fontWeight": 700, "anchor": "start", "color": "#1A1F2B",
+              "subtitleColor": "#5C6372", "subtitleFontSize": 13, "offset": 18},
+    "axis": {"labelColor": "#5C6372", "titleColor": "#5C6372", "labelFontSize": 12,
+             "titleFontSize": 12, "titleFontWeight": 500, "gridColor": "#EEF0F3",
+             "domain": false, "tickColor": "#E3E5E9"}
+  }
+}
