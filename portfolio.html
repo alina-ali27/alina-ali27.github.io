@@ -147,25 +147,37 @@
         </div>
     </div>
 
-    <article class="entry">
-        <div class="entry__text">
-            <h3>Chart 1: Service is back, riders aren’t</h3>
-            <p class="todo">Your 25-word comment on Chart 1.</p>
-            <p class="entry__source">Source: Federal Transit Administration, National Transit Database</p>
-            <p class="entry__links"><a href="cc3_chart1.json">Chart JSON</a> <a href="chart1_service_ridership.csv">Data</a></p>
-        </div>
-        <figure class="entry__chart" id="Location5"></figure>
-    </article>
+<article class="entry">
+    <div class="entry__text">
+        <h3>Chart 1: Service is back, riders aren’t</h3>
+        <p>US transit runs as much service as in 2019 but carries about 15% fewer riders. Restoring service alone hasn’t brought back pre-pandemic commuters.</p>
 
-    <article class="entry">
-        <div class="entry__text">
-            <h3>Chart 2: More service, more riders</h3>
-            <p class="todo">Your 25-word comment on Chart 2.</p>
-            <p class="entry__source">Source: Federal Transit Administration, National Transit Database</p>
-            <p class="entry__links"><a href="cc3_chart2.json">Chart JSON</a> <a href="chart2_agencies.csv">Data</a></p>
-        </div>
-        <figure class="entry__chart" id="Location6"></figure>
-    </article>
+        <details class="method">
+            <summary>How I made this chart</summary>
+            <p>I used the Federal Transit Administration’s National Transit Database (Complete Monthly Ridership, August 2026 release). In Python, I removed FTA’s summary rows and dial-a-ride and vanpool services, then added up monthly trips and vehicle revenue miles across all agencies. Trips and miles are measured in different units, so I indexed each to its 2019 monthly average (2019 = 100). That puts both on one scale and shows each against the last normal year before the pandemic. A 3-month average smooths out seasonal swings.</p>
+        </details>
+
+        <p class="entry__source">Source: Federal Transit Administration, National Transit Database</p>
+        <p class="entry__links"><a href="cc3_chart1.json">Chart JSON</a> <a href="chart1_service_ridership.csv">Data</a></p>
+    </div>
+    <figure class="entry__chart" id="Location5"></figure>
+</article>
+
+<article class="entry">
+    <div class="entry__text">
+        <h3>Chart 2: More service, more riders</h3>
+        <p>Across 127 agencies, every 10% increase in service is linked to about 5% more riders, evidence that funding operations, not just infrastructure, supports recovery.</p>
+
+        <details class="method">
+            <summary>How I made this chart</summary>
+            <p>Using the database’s calendar-year totals, I combined each agency’s bus and rail services and compared 2019 with 2025, the latest full year. Percentage changes put agencies of very different sizes on equal footing. I kept the 127 agencies with at least 5 million trips in 2019, excluding two whose service was discontinued or transferred. The coral line is a least-squares trend (correlation 0.51). It shows an association, not proof of cause: other factors, such as fare-free policies, also affect ridership.</p>
+        </details>
+
+        <p class="entry__source">Source: Federal Transit Administration, National Transit Database</p>
+        <p class="entry__links"><a href="cc3_chart2.json">Chart JSON</a> <a href="chart2_agencies.csv">Data</a></p>
+    </div>
+    <figure class="entry__chart" id="Location6"></figure>
+</article>
 </section>
         </section>      
 
