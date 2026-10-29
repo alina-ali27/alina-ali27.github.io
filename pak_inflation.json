@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Inflation",
+    "text": "Inflation in Pakistan",
     "anchor": "start",
     "subtitle": "CPI, % | Source: PBS (WB) through ECO API",
     "fontSize": "14",
     "subtitleFontSize": "12",
     "color": "#000000",
-    "subtitleColor": "#000000"
+    "subtitleColor": "#808080"
   },
   "height": "250",
   "width": "container",
@@ -28,7 +28,7 @@
   },
   "mark": {
     "type": "line",
-    "color": "#f4134d",
+    "color": "#316c2d",
     "strokeWidth": "2"
   },
   "encoding": {
@@ -36,7 +36,7 @@
       "field": "date",
       "type": "temporal",
       "axis": {
-        "title": "",
+        "title": "Year",
         "titleColor": "#122B39",
         "grid": false
       }
@@ -45,7 +45,7 @@
       "field": "value",
       "type": "quantitative",
       "axis": {
-        "title": "",
+        "title": "CPI (%)",
         "titleColor": "#122B39",
         "grid": false
       }
