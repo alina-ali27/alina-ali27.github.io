@@ -1,0 +1,102 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "US fixed-route transit: service and ridership, 3-month average, indexed to 2019",
+
+  "title": {
+    "text": "Service is back. Riders aren’t.",
+    "subtitle": [
+      "Monthly trips and vehicle revenue miles, US fixed-route transit,",
+      "3-month average, indexed to 2019 = 100"
+    ]
+  },
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/alina-ali27/alina-ali27.github.io/refs/heads/main/chart1_service_ridership.csv",
+    "format": {"parse": {"date": "date", "index_2019": "number"}}
+  },
+
+  "width": "container",
+  "height": 380,
+  "autosize": {"type": "fit", "contains": "padding"},
+
+  "transform": [
+    {"calculate": "indexof(datum.measure, 'Ridership') >= 0 ? 'Ridership' : 'Service'", "as": "m"},
+    {"window": [{"op": "mean", "field": "index_2019", "as": "smooth"}],
+     "frame": [-2, 0], "groupby": ["m"], "sort": [{"field": "date"}]}
+  ],
+
+  "encoding": {
+    "x": {"field": "date", "type": "temporal", "title": "Year",
+          "axis": {"format": "%Y", "tickCount": "year"}},
+    "y": {"field": "smooth", "type": "quantitative", "title": "Index, 2019 = 100",
+          "scale": {"domain": [0, 115]}}
+  },
+
+  "layer": [
+    {
+      "description": "Shaded gap between service and ridership, from March 2020",
+      "transform": [
+        {"filter": {"field": "date", "gte": {"year": 2020, "month": "mar", "date": 1}}},
+        {"pivot": "m", "value": "smooth", "groupby": ["date"]}
+      ],
+      "mark": {"type": "area", "color": "#2B3CE0", "opacity": 0.08},
+      "encoding": {
+        "y": {"field": "Ridership", "type": "quantitative"},
+        "y2": {"field": "Service"}
+      }
+    },
+    {
+      "description": "Dashed line at the 2019 level",
+      "mark": {"type": "rule", "strokeDash": [4, 4], "color": "#9AA1AE"},
+      "encoding": {"x": null, "y": {"datum": 100}}
+    },
+    {
+      "description": "The two lines",
+      "mark": {"type": "line", "strokeWidth": 2.5, "interpolate": "monotone"},
+      "encoding": {
+        "color": {"field": "m", "scale": {"domain": ["Service", "Ridership"], "range": ["#9AA1AE", "#2B3CE0"]}, "legend": null},
+        "tooltip": [
+          {"field": "date", "type": "temporal", "title": "Month", "format": "%B %Y"},
+          {"field": "m", "title": "Measure"},
+          {"field": "smooth", "title": "Index (2019 = 100), 3-month average", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "description": "Labels at the end of each line, instead of a legend",
+      "transform": [
+        {"window": [{"op": "rank", "as": "r"}], "sort": [{"field": "date", "order": "descending"}], "groupby": ["m"]},
+        {"filter": "datum.r == 1"}
+      ],
+      "mark": {"type": "text", "align": "left", "dx": 6, "fontWeight": 600, "fontSize": 13},
+      "encoding": {
+        "text": {"field": "m"},
+        "color": {"field": "m", "scale": {"domain": ["Service", "Ridership"], "range": ["#9AA1AE", "#2B3CE0"]}, "legend": null}
+      }
+    },
+    {
+      "description": "Note on the 2019 line, drawn from a single row so it appears once",
+      "transform": [
+        {"window": [{"op": "row_number", "as": "row"}]},
+        {"filter": "datum.row == 1"}
+      ],
+      "mark": {"type": "text", "align": "left", "baseline": "bottom", "dy": -4, "fontSize": 11, "color": "#5C6372"},
+      "encoding": {
+        "x": {"datum": {"year": 2021, "month": "jan", "date": 1}, "type": "temporal"},
+        "y": {"datum": 100},
+        "text": {"value": "2019 level"}
+      }
+    }
+  ],
+
+  "config": {
+    "font": "Archivo, Helvetica Neue, Arial, sans-serif",
+    "view": {"stroke": null},
+    "title": {"fontSize": 19, "fontWeight": 700, "anchor": "start", "color": "#1A1F2B",
+              "subtitleColor": "#5C6372", "subtitleFontSize": 13, "offset": 18},
+    "axis": {"labelColor": "#5C6372", "titleColor": "#5C6372", "labelFontSize": 12,
+             "titleFontSize": 12, "titleFontWeight": 500, "gridColor": "#EEF0F3",
+             "domain": false, "tickColor": "#E3E5E9"},
+    "axisX": {"grid": false}
+  }
+}
