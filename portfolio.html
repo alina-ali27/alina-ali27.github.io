@@ -125,19 +125,48 @@
         </section>
 
         <!-- CHALLENGE 3 -->
-        <section class="challenge" id="challenge3" aria-labelledby="challenge3-title">
-            <header class="challenge__head">
-                <p class="challenge__num" aria-hidden="true">3</p>
-                <div>
-                    <h2 id="challenge2-title">Challenge 3 - Policy Debate</h2>
-                    <p class="challenge__about">Use visualisations in policy commentary</p>
-                </div>
-            </header>
-                <p class="policy-topic"> US federal transit funding mostly pays for capital projects, not running services.
-                As Congress rewrites surface transportation law, should more of it fund operations?</p>
-              <p class="entry__source">Source: Congressional Research Service,
-              <a href="https://www.everycrsreport.com/files/2026-09-02_R48644_ae0d3904c1e7e010c54fc6fa78506fdeb5048de0.html">Surface Transportation Reauthorization: Public Transportation</a>(R48644), updated 2 September 2026.
-              </p>
+<!-- ================= CHALLENGE 3 ================= -->
+<section class="challenge" id="challenge3" aria-labelledby="challenge3-title">
+    <header class="challenge__head">
+        <p class="challenge__num" aria-hidden="true">3</p>
+        <div>
+            <h2 id="challenge3-title">Challenge 3</h2>
+            <p class="challenge__about">Policy debate: using visualisations in policy commentary</p>
+        </div>
+    </header>
+
+    <!-- Policy topic (25 words max) -->
+    <div class="entry">
+        <div class="entry__text">
+            <h3>The policy question</h3>
+            <p>US federal transit funding mostly pays for capital projects, not running services.
+               As Congress rewrites surface transportation law, should more of it fund operations?</p>
+            <p class="entry__source">Source: Congressional Research Service,
+               <a href="https://www.everycrsreport.com/files/2026-09-02_R48644_ae0d3904c1e7e010c54fc6fa78506fdeb5048de0.html">Surface Transportation Reauthorization: Public Transportation</a>
+               (R48644), updated 2 September 2026.</p>
+        </div>
+    </div>
+
+    <article class="entry">
+        <div class="entry__text">
+            <h3>Chart 1: Service is back, riders aren’t</h3>
+            <p class="todo">Your 25-word comment on Chart 1.</p>
+            <p class="entry__source">Source: Federal Transit Administration, National Transit Database</p>
+            <p class="entry__links"><a href="cc3_chart1.json">Chart JSON</a> <a href="chart1_service_ridership.csv">Data</a></p>
+        </div>
+        <figure class="entry__chart" id="Location5"></figure>
+    </article>
+
+    <article class="entry">
+        <div class="entry__text">
+            <h3>Chart 2: More service, more riders</h3>
+            <p class="todo">Your 25-word comment on Chart 2.</p>
+            <p class="entry__source">Source: Federal Transit Administration, National Transit Database</p>
+            <p class="entry__links"><a href="cc3_chart2.json">Chart JSON</a> <a href="chart2_agencies.csv">Data</a></p>
+        </div>
+        <figure class="entry__chart" id="Location6"></figure>
+    </article>
+</section>
         </section>      
 
         <!-- CHALLENGE 4 -->
@@ -217,7 +246,12 @@
 
         let figure_4_spec = "pak_unemp.json";
         vegaEmbed('#Location4', figure_4_spec);
+        // Challenge 3
+        let figure_5_spec = "pak_inflation.json";
+        vegaEmbed('#Location5', figure_5_spec);
 
+        let figure_6_spec = "pak_unemp.json";
+        vegaEmbed('#Location6', figure_6_spec);
     </script>
 
 </body>
