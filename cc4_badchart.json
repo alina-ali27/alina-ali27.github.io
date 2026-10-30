@@ -1,0 +1,76 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Replica of the Fox News chart: percentage of Americans who identify as Christians, 2009 vs 2019",
+
+  "width": 520,
+  "height": 260,
+  "padding": {"top": 66, "left": 30, "right": 30, "bottom": 40},
+  "background": "#17398C",
+  "view": {"fill": "#0A1E55", "stroke": "#C9D4EE", "strokeWidth": 1.5},
+
+  "data": {"values": [
+    {"year": "2009", "pct": 77},
+    {"year": "2019", "pct": 65}
+  ]},
+
+  "encoding": {
+    "x": {"field": "year", "type": "nominal", "title": null,
+          "scale": {"paddingInner": 0.4, "paddingOuter": 0.3},
+          "axis": {"labelColor": "#FFFFFF", "labelFontSize": 12, "labelAngle": 0,
+                   "domain": false, "ticks": false, "labelPadding": 8}},
+    "y": {"field": "pct", "type": "quantitative", "title": null,
+          "scale": {"domain": [58, 78], "nice": false, "clamp": true},
+          "axis": {"orient": "right", "values": [58, 68, 78], "labelColor": "#FFFFFF",
+                   "labelFontSize": 12, "gridColor": "#4A6BB5", "gridWidth": 1,
+                   "domain": false, "ticks": false, "labelPadding": 10}}
+  },
+
+  "layer": [
+    {
+      "description": "Yellow bars that start at 58%, not 0%: the truncated axis",
+      "mark": {"type": "bar", "color": "#FFE600"},
+      "encoding": {"y2": {"datum": 58}}
+    },
+    {
+      "description": "77% label inside the top of the first bar",
+      "transform": [{"filter": "datum.year == '2009'"}],
+      "mark": {"type": "text", "dy": 14, "fontSize": 15, "font": "Arial Narrow, Arial", "color": "#1A1A1A"},
+      "encoding": {"text": {"value": "77%"}}
+    },
+    {
+      "description": "65% label above the second bar",
+      "transform": [{"filter": "datum.year == '2019'"}],
+      "mark": {"type": "text", "dy": -12, "fontSize": 15, "font": "Arial Narrow, Arial", "color": "#FFFFFF"},
+      "encoding": {"text": {"value": "65%"}}
+    },
+    {
+      "description": "White title banner across the top, drawn above the plot",
+      "transform": [{"window": [{"op": "row_number", "as": "row"}]}, {"filter": "datum.row == 1"}],
+      "mark": {"type": "rect", "color": "#F2F2F2", "x": -20, "x2": {"expr": "width + 40"}, "y": -62, "y2": -24},
+      "encoding": {"x": null, "y": null}
+    },
+    {
+      "description": "Title text in the banner",
+      "transform": [{"window": [{"op": "row_number", "as": "row"}]}, {"filter": "datum.row == 1"}],
+      "mark": {"type": "text", "text": "PERCENTAGE OF AMERICANS THAT IDENTIFY AS CHRISTIANS",
+               "x": {"expr": "width / 2 + 10"}, "y": -43, "align": "center", "baseline": "middle",
+               "font": "Arial Narrow, Arial", "fontSize": 19, "fontWeight": "bold", "color": "#111111"},
+      "encoding": {"x": null, "y": null}
+    },
+    {
+      "description": "Percent sign above the right-hand axis",
+      "transform": [{"window": [{"op": "row_number", "as": "row"}]}, {"filter": "datum.row == 1"}],
+      "mark": {"type": "text", "text": "%", "x": {"expr": "width + 30"}, "y": -4, "fontSize": 11, "color": "#FFFFFF"},
+      "encoding": {"x": null, "y": null}
+    },
+    {
+      "description": "Source line underneath, as on screen",
+      "transform": [{"window": [{"op": "row_number", "as": "row"}]}, {"filter": "datum.row == 1"}],
+      "mark": {"type": "text", "text": "PEW RESEARCH CENTER", "x": {"expr": "width / 2"}, "y": {"expr": "height + 34"},
+               "align": "center", "font": "Arial Narrow, Arial", "fontSize": 11, "fontWeight": "bold", "color": "#FFE600"},
+      "encoding": {"x": null, "y": null}
+    }
+  ],
+
+  "config": {"font": "Arial Narrow, Arial, sans-serif"}
+}
