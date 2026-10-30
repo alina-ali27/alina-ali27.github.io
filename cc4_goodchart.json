@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Improved version: share of US adults identifying as Christian and as religiously unaffiliated, every year 2009 to 2018/19",
+
+  "title": {
+    "text": "A steady decline, not a sudden collapse",
+    "subtitle": [
+      "Share of US adults who identify as Christian or as religiously unaffiliated, 2009 to 2018/19.",
+      "Shaded band: margin of error (about ±1 point). Pew Research Center telephone surveys."
+    ]
+  },
+
+  "width": 600,
+  "height": 380,
+  "autosize": {"type": "fit", "contains": "padding"},
+
+  "data": {"values": [
+    {"year": 2009,   "label": "2009",    "christian": 77, "unaffiliated": 17, "moe": 1.0, "n": 12529},
+    {"year": 2010,   "label": "2010",    "christian": 76, "unaffiliated": 17, "moe": 1.0, "n": 13823},
+    {"year": 2011,   "label": "2011",    "christian": 75, "unaffiliated": 19, "moe": 0.9, "n": 17870},
+    {"year": 2012,   "label": "2012",    "christian": 73, "unaffiliated": 19, "moe": 0.7, "n": 25051},
+    {"year": 2013,   "label": "2013",    "christian": 73, "unaffiliated": 20, "moe": 0.9, "n": 16017},
+    {"year": 2014,   "label": "2014",    "christian": 71, "unaffiliated": 21, "moe": 0.7, "n": 25010},
+    {"year": 2015,   "label": "2015",    "christian": 69, "unaffiliated": 24, "moe": 0.8, "n": 17518},
+    {"year": 2016,   "label": "2016",    "christian": 68, "unaffiliated": 23, "moe": 0.9, "n": 15812},
+    {"year": 2017,   "label": "2017",    "christian": 67, "unaffiliated": 25, "moe": 1.0, "n": 12522},
+    {"year": 2018.5, "label": "2018/19", "christian": 65, "unaffiliated": 26, "moe": 1.0, "n": 12738}
+  ]},
+
+  "transform": [
+    {"fold": ["christian", "unaffiliated"], "as": ["group", "pct"]},
+    {"calculate": "datum.group == 'christian' ? 'Christian' : 'Unaffiliated'", "as": "Group"},
+    {"calculate": "datum.pct - datum.moe", "as": "low"},
+    {"calculate": "datum.pct + datum.moe", "as": "high"}
+  ],
+
+  "encoding": {
+    "x": {"field": "year", "type": "quantitative", "title": null,
+          "scale": {"domain": [2009, 2018.5], "nice": false, "padding": 10},
+          "axis": {"values": [2009, 2011, 2013, 2015, 2017, 2018.5],
+                   "labelExpr": "datum.value == 2018.5 ? '2018/19' : datum.value", "grid": false}},
+    "y": {"field": "pct", "type": "quantitative", "title": "% of US adults",
+          "scale": {"domain": [0, 100]},
+          "axis": {"values": [0, 25, 50, 75, 100], "labelExpr": "datum.label + '%'"}},
+    "color": {"field": "Group", "type": "nominal",
+              "scale": {"domain": ["Christian", "Unaffiliated"], "range": ["#2B3CE0", "#E2711D"]},
+              "legend": null}
+  },
+
+  "layer": [
+    {
+      "description": "Margin-of-error band",
+      "mark": {"type": "area", "opacity": 0.15},
+      "encoding": {"y": {"field": "low", "type": "quantitative"}, "y2": {"field": "high"}}
+    },
+    {
+      "description": "The two lines",
+      "mark": {"type": "line", "strokeWidth": 2.5, "point": {"filled": true, "size": 40}},
+      "encoding": {
+        "tooltip": [
+          {"field": "label", "title": "Year"},
+          {"field": "Group", "title": "Group"},
+          {"field": "pct", "title": "Share of US adults (%)"},
+          {"field": "n", "title": "People surveyed that year", "format": ","}
+        ]
+      }
+    },
+    {
+      "description": "Start and end values",
+      "transform": [
+        {"filter": "datum.year == 2009 || datum.year == 2018.5"},
+        {"calculate": "datum.pct + '%'", "as": "pct_label"}
+      ],
+      "mark": {"type": "text", "dy": -14, "fontSize": 13, "fontWeight": 600},
+      "encoding": {"text": {"field": "pct_label"}}
+    },
+    {
+      "description": "Line labels instead of a legend",
+      "transform": [{"filter": "datum.year == 2018.5"}],
+      "mark": {"type": "text", "align": "left", "dx": 12, "fontSize": 13, "fontWeight": 600},
+      "encoding": {"text": {"field": "Group"}}
+    }
+  ],
+
+  "config": {
+    "font": "Archivo, Helvetica Neue, Arial, sans-serif",
+    "view": {"stroke": null},
+    "title": {"fontSize": 19, "fontWeight": 700, "anchor": "start", "color": "#1A1F2B",
+              "subtitleColor": "#5C6372", "subtitleFontSize": 13, "offset": 18},
+    "axis": {"labelColor": "#5C6372", "titleColor": "#5C6372", "labelFontSize": 12,
+             "titleFontSize": 12, "titleFontWeight": 500, "gridColor": "#EEF0F3",
+             "domain": false, "tickColor": "#E3E5E9"}
+  }
+}
