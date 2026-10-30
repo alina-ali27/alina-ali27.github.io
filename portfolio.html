@@ -186,17 +186,114 @@
 </section>
         </section>      
 
-        <!-- CHALLENGE 4 -->
-        <section class="challenge" id="challenge4" aria-labelledby="challenge4-title">
-            <header class="challenge__head">
-                <p class="challenge__num" aria-hidden="true">4</p>
-                <div>
-                    <h2 id="challenge2-title">Challenge 4 - Replication</h2>
-                    <p class="challenge__about">Re-create, then improve, someone else’s chart</p>
-                </div>
-            </header>
-          
-        </section> 
+<!-- ================= CHALLENGE 4 ================= -->
+<section class="challenge" id="challenge4" aria-labelledby="challenge4-title">
+    <header class="challenge__head">
+        <p class="challenge__num" aria-hidden="true">4</p>
+        <div>
+            <h2 id="challenge4-title">Challenge 4: Replication</h2>
+            <p class="challenge__about">Re-create, then improve, someone else’s chart</p>
+        </div>
+    </header>
+
+    <!-- 1. THE ORIGINAL -->
+    <article class="entry">
+        <div class="entry__text">
+            <h3>The original: Fox News</h3>
+            <p>Fox News graphics are often cited as examples of misleading chart design. This one, shown on <em>Tucker Carlson Tonight</em>, compares the share of Americans who identify as Christian in 2009 and 2019, using data from the Pew Research Center.</p>
+            <p>Its y-axis starts at 58% rather than 0%. The real fall is 12 percentage points, from 77% to 65%, about a sixth of the original share. But because both bars start at 58, the 2019 bar is drawn less than half as tall as the 2009 bar, so it looks as if Christianity more than halved in a decade.</p>
+            <p class="entry__source">Source: screenshot from Fox News, <em>Tucker Carlson Tonight</em></p>
+        </div>
+        <figure class="entry__chart entry__image">
+            <img src="cc4_img_ref.png" alt="Fox News bar chart titled ‘Percentage of Americans that identify as Christians’, showing 77% in 2009 and 65% in 2019, with a y-axis starting at 58%.">
+        </figure>
+    </article>
+
+    <!-- 2. THE DATA AND ITS CAVEATS -->
+    <article class="entry">
+        <div class="entry__text">
+            <h3>The data behind it</h3>
+            <p>Both figures come from a 2019 Pew Research Center report. The numbers are accurate, but the way the chart presents them leaves out a lot.</p>
+            <p class="entry__source">Source: Pew Research Center (2019),
+                <a href="https://www.pewresearch.org/religion/2019/10/17/in-u-s-decline-of-christianity-continues-at-rapid-pace/">In U.S., Decline of Christianity Continues at Rapid Pace</a>.
+                Year-by-year figures from the
+                <a href="https://legacy.pewresearch.org/religion/wp-content/uploads/sites/7/2019/10/Detailed-Tables-v1-FOR-WEB.pdf">detailed tables</a>.</p>
+        </div>
+        <div class="entry__text caveats">
+            <h4>Two years hide the trend</h4>
+            <p>Pew has a figure for every year in between: 77, 76, 75, 73, 73, 71, 69, 68 and 67%, then 65%. The decline was steady, about one point a year, not a sudden collapse.</p>
+
+            <h4>“2019” isn’t one year</h4>
+            <p>The final figure combines surveys from January 2018 to July 2019.</p>
+
+            <h4>It’s a sample, not a count</h4>
+            <p>Each year’s estimate comes from about 12,500 telephone interviews, weighted to represent the roughly 256 million US adults in 2019. That gives a margin of error of about ±1 point.</p>
+
+            <h4>How the question was asked matters</h4>
+            <p>The data comes from one question about religious identity in political phone polls. Pew itself notes that some people may not want to tell an interviewer they aren’t religious, so phone surveys may overstate religiosity.</p>
+
+            <h4>The caption claims more than the data shows</h4>
+            <p>“We used to be an enthusiastically Christian nation” describes enthusiasm. The survey measures only whether people call themselves Christian, not what they believe or how often they practise.</p>
+        </div>
+    </article>
+
+    <!-- 3. THE REPLICA -->
+    <article class="entry">
+        <div class="entry__text">
+            <h3>Step 1: Replicating the chart</h3>
+            <p>I traced the two values and rebuilt Fox’s design in Vega-Lite: a y-axis running from 58% to 78%, bars that start at 58, three ticks on a right-hand axis, a navy background, yellow bars and a white title banner.</p>
+            <p class="entry__links"><a href="cc4_replica.json">Chart JSON</a></p>
+        </div>
+        <figure class="entry__chart" id="Location9"></figure>
+    </article>
+
+    <!-- 4. THE IMPROVED VERSION -->
+    <article class="entry">
+        <div class="entry__text">
+            <h3>Step 2: Improving it</h3>
+            <p>I started the axis at zero, added every year Pew surveyed and the unaffiliated share, and showed margins of error, revealing a steady, measured decline.</p>
+
+            <details class="method">
+                <summary>What I changed and why</summary>
+                <ul>
+                    <li><strong>The axis starts at 0%.</strong> Each line’s height now matches its real value, so a 12-point fall looks like a 12-point fall.</li>
+                    <li><strong>Every year is shown, not just two.</strong> Ten data points reveal a gradual decline of about a point a year that the two endpoints hid.</li>
+                    <li><strong>A line replaces the bars.</strong> Lines are better for showing change over time, and they don’t need to start at zero to avoid exaggerating differences.</li>
+                    <li><strong>The last point is labelled “2018/19”.</strong> That’s the period Pew’s figure actually covers.</li>
+                    <li><strong>The unaffiliated share is added.</strong> It shows where people went: the share calling themselves atheist, agnostic or “nothing in particular” rose from 17% to 26%.</li>
+                    <li><strong>The margin of error is shown</strong> as a shaded band, so readers can see how precise each estimate is.</li>
+                    <li><strong>The title describes the data.</strong> “A steady decline, not a sudden collapse” replaces a caption that made a claim the data can’t support.</li>
+                    <li><strong>The source is in full,</strong> and hovering over any point shows how many people were surveyed that year.</li>
+                </ul>
+            </details>
+
+            <p class="entry__source">Source: Pew Research Center (2019), aggregated telephone surveys, 2009 to July 2019</p>
+            <p class="entry__links"><a href="cc4_improved.json">Chart JSON</a></p>
+        </div>
+        <figure class="entry__chart" id="Location10"></figure>
+    </article>
+
+    <!-- 5. NOTES ON THE DATA -->
+    <article class="entry">
+        <div class="entry__text">
+            <h3>Questions worth asking</h3>
+            <p>Three questions to ask of any chart like this, answered from Pew’s own report.</p>
+        </div>
+        <div class="entry__text caveats">
+            <h4>Why compare 2009 with 2019?</h4>
+            <p>2009 is simply where Pew’s series of political surveys begins, and 2018/19 was the latest data available. Comparing only the endpoints makes the change look dramatic; the years in between show a steady, gradual decline.</p>
+
+            <h4>How many Americans does this represent?</h4>
+            <p>Pew interviewed 12,529 people in 2009 and 12,738 in 2018/19, and 168,890 people across 88 surveys in total. Weighted to the adult population, 77% in 2009 meant roughly 178 million Christian adults; 65% in 2019 meant roughly 167 million.</p>
+
+            <h4>Where did the data come from, and could the method bias it?</h4>
+            <p>Pew Research Center is a nonpartisan research organisation funded mainly by The Pew Charitable Trusts. The data comes from random-digit-dial phone polls, with results weighted to match Census figures. Pew notes two possible biases: people may overstate their religiosity to an interviewer, and the people who answer phone surveys may differ from those who don’t.</p>
+
+            <h4>What has happened since?</h4>
+            <p>Pew’s 2023-24 Religious Landscape Study, a survey of nearly 37,000 adults, put the Christian share at about 62%, roughly where it had been since 2021. The decline may have levelled off.</p>
+        </div>
+    </article>
+</section>
 
           <!-- CHALLENGE 5 -->
         <section class="challenge" id="challenge5" aria-labelledby="challenge5-title">
@@ -269,6 +366,14 @@
 
         let figure_6_spec = "cc3_chart2.json";
         vegaEmbed('#Location6', figure_6_spec);
+
+        //Challenge 4
+        // Challenge 4
+        let figure_7_spec = "cc4_badchart.json";
+        vegaEmbed('#Location7', figure_7_spec);
+
+        let figure_8_spec = "cc4_goodchart.json";
+        vegaEmbed('#Location8', figure_8_spec);
     </script>
 
 </body>
