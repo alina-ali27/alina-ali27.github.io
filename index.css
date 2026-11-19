@@ -1,5 +1,5 @@
 /* =========================================================
-   Alina Ali: shared styles for every page
+   shared styles for every page
    (index.html, about.html, portfolio.html, project.html)
    White page so the Vega-Lite charts (white by default) blend in.
    Change the colours once here and the whole site follows.
@@ -879,3 +879,52 @@ a:hover { color: var(--accent); }
     .hero__band { animation: none; opacity: 0.1; }
     .hero__dot { animation: none; opacity: 1; }
 }
+
+.entry__right { min-width: 0; }
+
+.api-spec {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--wash);
+    border-radius: 6px;
+}
+
+.api-spec h4 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+    font-weight: 650;
+}
+
+.api-spec p {
+    margin: 0 0 0.75rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.api-spec p strong { font-family: var(--sans); }
+
+.api-spec code {
+    font-size: 0.85rem;
+    word-break: break-all;      /* long URLs wrap instead of overflowing */
+    background: #FFFFFF;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+}
+
+.api-table {
+    width: 100%;
+    margin: 0.5rem 0 1.25rem;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.api-table th,
+.api-table td {
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+}
+
+.api-table th { font-weight: 600; color: var(--muted); }
