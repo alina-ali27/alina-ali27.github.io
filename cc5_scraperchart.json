@@ -1,0 +1,71 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Which GDPR articles are cited most often in fines, from data scraped from the CMS GDPR Enforcement Tracker",
+
+  "title": {
+    "text": "Half of all GDPR fines cite the core principles of data processing",
+    "subtitle": [
+      "Number of fines citing each GDPR article, 2018 to 2026. A fine can cite several articles.",
+      "Excludes Articles 58 and 83, which set out authorities’ powers and how fines are calculated.",
+      "Source: CMS GDPR Enforcement Tracker (CC BY-NC-SA 4.0), scraped and cleaned in Python."
+    ]
+  },
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/alina-ali27/alina-ali27.github.io/refs/heads/main/gdpr_fines_long.csv",
+    "format": {"type": "csv", "parse": {"etid": "number", "gdpr_article": "number"}}
+  },
+
+  "width": 700,
+  "height": 420,
+  "autosize": {"type": "fit", "contains": "padding"},
+  "padding": {"top": 5, "left": 5, "bottom": 12, "right": 90},
+
+  "transform": [
+    {"joinaggregate": [{"op": "distinct", "field": "etid", "as": "total_fines"}]},
+    {"filter": "datum.gdpr_article != 58 && datum.gdpr_article != 83"},
+    {"aggregate": [{"op": "distinct", "field": "etid", "as": "fines"}],
+     "groupby": ["gdpr_article", "article_title", "total_fines"]},
+    {"window": [{"op": "row_number", "as": "rank"}], "sort": [{"field": "fines", "order": "descending"}]},
+    {"filter": "datum.rank <= 12"},
+    {"calculate": "'Art. ' + datum.gdpr_article + '  ' + datum.article_title", "as": "label"},
+    {"calculate": "datum.fines / datum.total_fines", "as": "share"},
+    {"calculate": "format(datum.fines, ',') + '  (' + format(datum.share, '.0%') + ')'", "as": "value_label"}
+  ],
+
+  "encoding": {
+    "y": {"field": "label", "type": "nominal", "title": null, "sort": "-x",
+          "axis": {"labelLimit": 320, "labelFontSize": 12, "labelColor": "#1A1F2B", "ticks": false, "labelPadding": 8}},
+    "x": {"field": "fines", "type": "quantitative", "title": "Number of fines citing the article",
+          "axis": {"format": ",.0f", "tickCount": 5}, "scale": {"padding": 0}}
+  },
+
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 3, "height": {"band": 0.7}},
+      "encoding": {
+        "color": {"condition": {"test": "datum.rank <= 3", "value": "#3B3FD8"}, "value": "#A9B4F5"},
+        "tooltip": [
+          {"field": "label", "title": "Article"},
+          {"field": "fines", "title": "Fines citing it", "format": ","},
+          {"field": "share", "title": "Share of all fines", "format": ".0%"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 12, "color": "#5C6372"},
+      "encoding": {"text": {"field": "value_label"}}
+    }
+  ],
+
+  "config": {
+    "font": "Archivo, Helvetica Neue, Arial, sans-serif",
+    "view": {"stroke": null},
+    "title": {"fontSize": 19, "fontWeight": 700, "anchor": "start", "color": "#1A1F2B",
+              "subtitleColor": "#5C6372", "subtitleFontSize": 13, "offset": 18},
+    "axis": {"labelColor": "#5C6372", "titleColor": "#5C6372", "labelFontSize": 12,
+             "titleFontSize": 12, "titleFontWeight": 500, "gridColor": "#EEF0F3",
+             "domain": false, "tickColor": "#E3E5E9"},
+    "axisY": {"grid": false}
+  }
+}
