@@ -296,14 +296,90 @@
 </section>
 
           <!-- CHALLENGE 5 -->
-        <section class="challenge" id="challenge5" aria-labelledby="challenge5-title">
-            <header class="challenge__head">
-                <p class="challenge__num" aria-hidden="true">5</p>
-                <div>
-                    <h2 id="challenge2-title">Challenge 5 - Accessing Data</h2>
-                    <p class="challenge__about">Using an API and scraper</p>
-                </div>
-            </header>
+<section class="challenge" id="challenge5" aria-labelledby="challenge5-title">
+    <header class="challenge__head">
+        <p class="challenge__num" aria-hidden="true">5</p>
+        <div>
+            <h2 id="challenge5-title">Challenge 5: Accessing Data</h2>
+            <p class="challenge__about">Using an API and a scraper</p>
+        </div>
+    </header>
+
+    <!-- PART 1: API -->
+    <article class="entry">
+        <div class="entry__text">
+            <h3>Part 1: Live data from an API</h3>
+            <p>How much attention does the public pay to the EU’s new tech laws? This chart pulls monthly views of the English Wikipedia articles on the AI Act and the Digital Services Act straight from the Wikimedia Pageviews API, so it updates itself each month.</p>
+            <p>Attention to both laws is modest, with occasional spikes. Hover over the AI Act’s spike in early 2024 to see the month, when the European Parliament was voting on the law.</p>
+            <p class="entry__source">Source: Wikimedia Foundation, Pageviews API (live)</p>
+            <p class="entry__links"><a href="cc5_apichart.json">Chart JSON</a></p>
+        </div>
+
+        <div class="entry__right">
+            <figure class="entry__chart" id="Location9"></figure>
+
+            <!-- Functional description of the API, below the chart -->
+            <div class="api-spec">
+                <h4>How the API works</h4>
+
+                <p><strong>a. Base URL</strong></p>
+                <p><code>https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/</code></p>
+
+                <p><strong>b. Elements needed to call data</strong></p>
+                <p>Seven parts are added to the base URL in order, separated by slashes. No API key is needed.</p>
+                <table class="api-table">
+                    <thead>
+                        <tr><th>Element</th><th>Value I used</th><th>What it does</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Project</td><td><code>en.wikipedia</code></td><td>Which Wikipedia: here, English</td></tr>
+                        <tr><td>Access</td><td><code>all-access</code></td><td>Desktop and mobile combined</td></tr>
+                        <tr><td>Agent</td><td><code>user</code></td><td>Real people only, excluding bots and crawlers</td></tr>
+                        <tr><td>Article</td><td><code>Artificial_Intelligence_Act</code></td><td>The exact article title, with underscores for spaces</td></tr>
+                        <tr><td>Granularity</td><td><code>monthly</code></td><td>Monthly totals (<code>daily</code> also works)</td></tr>
+                        <tr><td>Start date</td><td><code>20160101</code></td><td>First date, as YYYYMMDD</td></tr>
+                        <tr><td>End date</td><td><code>20301231</code></td><td>Last date; set in the future so new months appear automatically</td></tr>
+                    </tbody>
+                </table>
+
+                <p><strong>c. The data returned</strong></p>
+                <p>The API returns JSON. The records sit in a list called <code>items</code>, which I select with <code>"format": {"property": "items"}</code>. Each record is one article in one month, with fields including <code>article</code>, <code>timestamp</code> and <code>views</code>. The data is already tidy (long format), but needs two small fixes: the timestamp arrives as text like <code>2024030100</code>, which I convert to a date with Vega-Lite’s <code>timeParse</code>, and article titles use underscores, which I replace with spaces. The API returns one article per request, so the chart makes two calls, one for each law.</p>
+
+                <p><strong>Full URLs used in the chart</strong></p>
+                <p><code>https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Artificial_Intelligence_Act/monthly/20160101/20301231</code></p>
+                <p><code>https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Digital_Services_Act/monthly/20160101/20301231</code></p>
+            </div>
+        </div>
+    </article>
+
+    <!-- PART 2: SCRAPER -->
+    <article class="entry">
+        <div class="entry__text">
+            <h3>Part 2: Scraping GDPR fines</h3>
+            <p>I scraped 3,422 GDPR fines embedded as JSON in the CMS Enforcement Tracker, fixed encoding errors and typos, then split cited articles into tidy rows.</p>
+
+            <details class="method">
+                <summary>How I scraped and cleaned the data</summary>
+                <ul>
+                    <li><strong>Found the data.</strong> The tracker’s table is filled in by JavaScript, so it’s empty in the page’s HTML. But all 3,422 fines are embedded as one JSON block in a <code>&lt;script&gt;</code> tag, so a single request got everything.</li>
+                    <li><strong>Scraped responsibly.</strong> I fetched the page once, saved it, and worked from the saved copy, identifying myself in the request.</li>
+                    <li><strong>Fixed the text encoding.</strong> The site doesn’t declare its encoding, so characters were garbled at first; decoding the raw bytes as UTF-8 fixed them.</li>
+                    <li><strong>Cleaned dates and amounts.</strong> 292 dates were only a year, a month or “Unknown”. I kept the year where it existed and recorded each date’s precision. Unknown fine amounts became missing values.</li>
+                    <li><strong>Made it tidy.</strong> Each fine can cite several GDPR articles in one text field. I split these so each row is one fine and one article (6,917 rows), corrected the typo “GDRP”, and excluded references to national laws.</li>
+                    <li><strong>Chose what to chart.</strong> The chart leaves out Articles 58 and 83, which describe authorities’ powers and fines rather than rules organisations broke.</li>
+                </ul>
+            </details>
+
+            <p class="entry__source">Source: CMS GDPR Enforcement Tracker, licensed CC BY-NC-SA 4.0</p>
+            <p class="entry__links">
+                <a href="https://colab.research.google.com/drive/105W9Au5fqpSBzzQy40TIcibQB0_O1RTN">Colab notebook</a>
+                <a href="cc5_scraperchart.json">Chart JSON</a>
+                <a href="gdpr_fines_long.csv">Data</a>
+            </p>
+        </div>
+        <figure class="entry__chart" id="Location10"></figure>
+    </article>
+</section>
           
         </section>  
 
@@ -368,12 +444,19 @@
         vegaEmbed('#Location6', figure_6_spec);
 
         //Challenge 4
-        // Challenge 4
         let figure_7_spec = "cc4_badchart.json";
         vegaEmbed('#Location7', figure_7_spec);
 
         let figure_8_spec = "cc4_goodchart.json";
         vegaEmbed('#Location8', figure_8_spec);
+
+        // Challenge 5
+        let figure_9_spec = "cc5_apichart.json";
+        vegaEmbed('#Location9', figure_9_spec);
+
+        let figure_10_spec = "cc5_scraperchart.json";
+        vegaEmbed('#Location10', figure_10_spec);
+    </script>
     </script>
 
 </body>
