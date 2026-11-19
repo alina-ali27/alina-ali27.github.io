@@ -1,9 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Monthly English Wikipedia pageviews for three EU tech laws, live from the Wikimedia Pageviews API",
+  "description": "Monthly English Wikipedia pageviews for the EU AI Act and Digital Services Act, live from the Wikimedia Pageviews API",
 
   "title": {
-    "text": "Which tech laws are people reading about?",
+    "text": "Which of the EU’s new tech laws are people reading about?",
     "subtitle": [
       "Monthly views of each law’s English Wikipedia article, by people (not bots).",
       "Live from the Wikimedia Pageviews API."
@@ -15,17 +15,6 @@
   "autosize": {"type": "fit", "contains": "padding"},
 
   "layer": [
-    {
-      "data": {
-        "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/General_Data_Protection_Regulation/monthly/20160101/20301231",
-        "format": {"type": "json", "property": "items"}
-      },
-      "transform": [
-        {"calculate": "timeParse(substring(datum.timestamp, 0, 8), '%Y%m%d')", "as": "month"},
-        {"calculate": "replace(datum.article, /_/g, ' ')", "as": "law"}
-      ],
-      "mark": {"type": "line", "strokeWidth": 2.5}
-    },
     {
       "data": {
         "url": "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/Artificial_Intelligence_Act/monthly/20160101/20301231",
@@ -54,8 +43,8 @@
     "x": {"field": "month", "type": "temporal", "title": null, "axis": {"format": "%Y", "grid": false}},
     "y": {"field": "views", "type": "quantitative", "title": "Monthly pageviews", "axis": {"format": "~s"}},
     "color": {"field": "law", "type": "nominal", "title": null,
-              "scale": {"domain": ["General Data Protection Regulation", "Artificial Intelligence Act", "Digital Services Act"],
-                        "range": ["#2B3CE0", "#E2711D", "#2A9D8F"]},
+              "scale": {"domain": ["Artificial Intelligence Act", "Digital Services Act"],
+                        "range": ["#2B3CE0", "#E2711D"]},
               "legend": {"orient": "top", "direction": "horizontal", "labelFontSize": 12, "labelLimit": 0}},
     "tooltip": [
       {"field": "law", "title": "Article"},
